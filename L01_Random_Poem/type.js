@@ -16,15 +16,19 @@ var RandomPoem;
     function getVerse(_subject, _predicate, _object) {
         //console.log ("blabla")
         // zufälliges Array auswählen
-        let randomSubjectIndex = Math.floor(Math.random() * _subject.length);
-        let randomPredicateIndex = Math.floor(Math.random() * _predicate.length);
-        let randomObjectIndex = Math.floor(Math.random() * _object.length);
+        let randomSubject = Math.floor(Math.random() * _subject.length);
+        let randomPredicate = Math.floor(Math.random() * _predicate.length);
+        let randomObject = Math.floor(Math.random() * _object.length);
+        let removeSubject = _subject.splice(randomSubject, 1)[0];
+        let removePredicate = _predicate.splice(randomPredicate, 1)[0];
+        let removeObject = _object.splice(randomObject, 1)[0];
         // Ergebnis dem Array Inhalt zuweisen
-        let randomSubject = _subject[randomSubjectIndex];
-        let randomPredicate = _predicate[randomPredicateIndex];
-        let randomObject = _object[randomObjectIndex];
+        // let randomSubject: string = _subject[randomSubjectIndex];
+        //let randomPredicate: string = _predicate[randomPredicateIndex];
+        //let randomObject: string = _object[randomObjectIndex];
+        let verse = removeSubject + removePredicate + removeObject;
         //let verse: string = _subject[randomSubject] + predicate[randomPredicate]
-        return (randomSubject + randomPredicate + randomObject);
+        return (verse);
     }
 })(RandomPoem || (RandomPoem = {}));
 //# sourceMappingURL=type.js.map
