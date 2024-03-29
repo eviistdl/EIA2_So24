@@ -1,5 +1,5 @@
 namespace RandomPoem {
-
+ debugger;
     //Arrays mit entsprechendem Inhalt
     let subject: string[] = ["Adora ", "Catra ", "Glimmer ", "Bow ", "Perfuma ", "Frosta "];
     let predicate: string[] = ["rettet ", "mag ", "wurde verbannt aus ", "zerstört ", "besucht ", "hasst "];

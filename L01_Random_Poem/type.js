@@ -1,6 +1,7 @@
 "use strict";
 var RandomPoem;
 (function (RandomPoem) {
+    debugger;
     //Arrays mit entsprechendem Inhalt
     let subject = ["Adora ", "Catra ", "Glimmer ", "Bow ", "Perfuma ", "Frosta "];
     let predicate = ["rettet ", "mag ", "wurde verbannt aus ", "zerstört ", "besucht ", "hasst "];
