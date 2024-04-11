@@ -1,0 +1,37 @@
+.div0 {
+    position: absolute;
+    left :5px;
+    width: calc(50vw - 15px);
+    height: 500px;
+    border-radius: 15px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.div1 {
+    position: absolute;
+    right: 5px;
+    width: calc(50vw - 15px);
+    height: 500px;
+    border: blue;
+    border-radius: 15px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: rgb(255, 200, 218);
+}
+
+
+.span {
+    position: fixed;
+    width: 150px;
+    height: 20px;
+    background-color: rgba(255, 211, 225, 0.5);
+    color: rgb(255, 200, 218);
+}

@@ -17,7 +17,7 @@ namespace RandomPoem {
         console.log(getVerse (subject, predicate, object));
     }
 
-    function getVerse(_subject:  string[], _predicate: string[], _object: string[]){ //Die Funktion greift auf die Arrays zu und weist ihnen die Eigenschaft String zu
+    function getVerse(_subject:  string[], _predicate: string[], _object: string[]) :string { //Die Funktion greift auf die Arrays zu und weist ihnen die Eigenschaft String zu
         //console.log ("blabla")
 
         // zufälliges Array auswählen
