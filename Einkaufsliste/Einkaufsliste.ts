@@ -1,29 +1,75 @@
-namespace L03_FormElements {
-    console.log("Let's get started");
+window.addEventListener('load', function() {
+    const newEntryButton = document.getElementById('newEntry');
+    const productEntry = document.getElementById('productEntry');
 
+    if (newEntryButton && productEntry) {
+        newEntryButton.addEventListener('click', function() {
+            // Neues Container-Div erstellen
+            const containerDiv = document.createElement('div');
+            containerDiv.classList.add('container');
 
-    window.addEventListener('load', function() { //wenn die Seite vollständig geladen ist, sollen die changes im Formular ausgelesen werden.
-        const form = document.getElementById('addWare') as HTMLFormElement; //Auf Formuar zugreifen
-        if (form) {
-            form.addEventListener('change', function() { //Bei change, Funktion ausführen
-                form.addEventListener('change', function(event) {
-                    const target = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement; 
-                    const name = target.name; // Name des Formularfelds
-                    const value = target.value; // Wert des Formularfelds
-                
-                    console.log(`Änderung in ${name}: ${value}`); // Ausgabe der Änderung in der Konsole
+            console.log("Ein neuer Eintrag wurde hinzugefügt)");
+
+            // Neues Div-Element erstellen
+            const newDiv = document.createElement('div');
+            // Setze eine ID für das neue Container-Div
+            containerDiv.id = 'newContainer';
+
+            // Formular-Elemente erstellen und dem neuen Div hinzufügen
+            const formElements = `
+                <form>
+                    <label for="ware">Ware:</label>
+                    <input type="text" name="ware" required>
+                    <br> 
+
+                    <label for="anzahl">Anzahl:</label>
+                    <input type="number" name="anzahl" min="1" max="100" required>
+                    <br> 
+
+                    <label for="kommentar">Kommentar:</label>
+                    <textarea name="kommentar" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
+                    <br> 
+
+                    <label for="kaufen">Gekauft?</label>
+                    <input type="checkbox" name="gekauft">
+                    <br> 
+
+                    <label for="letzterKauf">Letzter Kauf:</label>
+                    <input type="date" name="letzterKauf">
+                    <br> 
+                    <button id="deleteButton" type="button"> X </button>
+                </form>
+            `;
+
+            newDiv.innerHTML = formElements;
+
+            // Dem Container-Div hinzufügen
+            containerDiv.appendChild(productEntry);
+            containerDiv.appendChild(newDiv);
+
+            // Dem Dokument hinzufügen
+            document.body.appendChild(containerDiv);
+
+            // Löschen des Divs bei Klick auf den Löschen-Button
+            const deleteButton = newDiv.querySelector('#deleteButton');
+            if (deleteButton) {
+                deleteButton.addEventListener('click', function() {
+                    containerDiv.remove();
+                    console.log("Ein Eintrag wurde entfernt");
                 });
-            });
-        } 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Verhindert das Absenden des Formulars und das Neuladen der Seite
-            
-            let formData: FormData = new FormData(document.forms[0]);
-            
-            // Alle Formulardaten durchgehen und ausgeben
-            formData.forEach((value, name) => {
-                console.log(`${name}: ${value}`);
-            });
-    });
-},)
-}
+            }
+            // Änderungen im Formular anzeigen
+            const form = newDiv.querySelector('form');
+            if (form) {
+                form.addEventListener('change', function(event) {
+                    const target = event.target;
+                    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) {
+                        const name = target.name;
+                        const value = target.value;
+                        console.log(`Änderung in ${name}: ${value}`);
+                    }
+                });
+            }
+        });
+    }
+});
