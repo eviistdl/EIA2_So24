@@ -54,7 +54,7 @@ form {
 
 #newEntry{
     position: absolute;
-    left: calc(50vw - 75px);
+    left: calc(50vw - 70px);
     width: 150px;
     height: auto;
     border-radius: 15px;
