@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Einkaufsliste.js"></script>
+    <link rel="stylesheet" href="Einkaufsliste.css">
+    <title>WG Einkaufsliste</title>
+</head>
+<body>
+    <h1>WG Einkaufsliste</h1>
+
+    <div id="addWare">
+        <legend>Ware hinzufügen</legend>
+
+        <form>
+            Ware
+            <input type="text" name="Datalist" list="options" placeholder="Was kaufen?" required/>
+            <datalist id="options">
+                <option value="Butter"></option>
+                <option value="Zucker"></option>
+                <option value="Seife"></option>
+                <option value="Trauben"></option>
+                
+            </datalist>
+            <br> <hr />
+
+            Anzahl
+            <input type="number" name="Stepper" step="1" min="1" max="100" value="1" required />
+            <br> <hr />
+
+            Kommentar
+            <textarea name="kommentar" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
+            <br> <hr />
+
+            Beim nächsten Einkauf kaufen?
+            <input type="checkbox" name="NextPurchase" /> 
+            <br> <hr />
+
+            <input type="submit" value="Hinzufügen" />
+        </form>
+    </div>
+
+    <div>
+        <div id="shoppingList">
+            <legend>Eure Einkaufsliste</legend>
+
+    </div>
+
+</body>
+</html>
