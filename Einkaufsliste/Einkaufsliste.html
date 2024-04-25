@@ -10,43 +10,64 @@
 <body>
     <h1>WG Einkaufsliste</h1>
 
-    <div>
-        <button id="newEntry" type="button"> Produkt hinzufügen </button>
-    </div>
-
-
-    <div id="productEntry">
-        <!--<form>
-            Ware
-            <input type="text" name="Datalist" list="options" placeholder="Was kaufen?" required/>
+    <div id="addWare">
+        <legend>Ware hinzufügen</legend>
+            Item
+            <input type="text" id="wareInput" name="Datalist" list="options" placeholder="Was kaufen?" required/>
             <datalist id="options">
                 <option value="Butter"></option>
                 <option value="Zucker"></option>
                 <option value="Seife"></option>
                 <option value="Trauben"></option>
-                
+
             </datalist>
             <br> <hr />
 
-            Anzahl
-            <input type="number" name="Stepper" step="1" min="1" max="100" value="1" required />
+            Quantity
+            <input type="number" id="quantityInput" name="Stepper" step="1" min="1" max="100" value="1" required />
             <br> <hr />
 
-            Kommentar
-            <textarea name="kommentar" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
+            Comment
+            <textarea name="kommentar" id="commentInput" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
             <br> <hr />
+
+            <input type="submit" value="Hinzufügen" />
+
+    </div>
+
+    <div>
+        <div id="shoppingList">
+            <legend>Eure Einkaufsliste</legend>
+                <div id="Eintrag">
+                    <p id="itemName"> Brot </p>
+                    <form>
+                        <div id="checkBoxInput" >
+                        Gekauft?
+                        <input type="checkbox" name="NextPurchase" /> 
+                        <br>  
+                        </div>
+
+
+                        <div id="quantityInput"> Quantity
+                        <input type="number"  name="Stepper" step="1" min="1" max="100" value="1" required />
+                        <br> 
+                        </div>
             
-            Letzter Kauf
-            <input type="date" name="letzter Kauf" id="letzter Kauf">
-            <br>
+                        <div id="commentInput"> Comment
+                        <textarea name="kommentar"  rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
+                        <br> 
+                        </div>
 
-            Gekauft?
-            <input type="checkbox" name="NextPurchase" /> 
-            <br> <hr />
+                        <div id="date"> Last bought:
+                        <input type="date" name="today" value="2024-04-20">
+                        </div>
 
-            <button id="deleteButton" type="button"> X </button>
+                        <button id="deleteButton"> X </button>
+                        </form>
+                       
 
-        </form> -->
+                        
+                </div>
     </div>
 
 </body>
