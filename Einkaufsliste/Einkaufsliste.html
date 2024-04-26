@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="Einkaufsliste.js"></script>
+    <script src="data.js"></script>
+    <!--<script src="generateContent.js"></script>-->
     <link rel="stylesheet" href="Einkaufsliste.css">
     <title>WG Einkaufsliste</title>
 </head>
 <body>
-    <h1>WG Einkaufsliste</h1>
+    <h1>WG Shoppinglist</h1>
 
-    <div id="addWare">
-        <legend>Ware hinzufügen</legend>
+    <div id="addItem">
+        <legend>Add Item</legend>
             Item
-            <input type="text" id="wareInput" name="Datalist" list="options" placeholder="Was kaufen?" required/>
+            <input type="text" id="itemInput" name="Datalist" list="options" placeholder="Was kaufen?" required/>
             <datalist id="options">
                 <option value="Butter"></option>
                 <option value="Zucker"></option>
@@ -28,42 +30,19 @@
             <br> <hr />
 
             Comment
-            <textarea name="kommentar" id="commentInput" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
+            <textarea name="comment" id="commentInput" rows="2" placeholder="details..."></textarea>
             <br> <hr />
 
             <input type="submit" value="Hinzufügen" />
 
     </div>
-
+    
+<form>
     <div>
         <div id="shoppingList">
-            <legend>Eure Einkaufsliste</legend>
-                <div id="Eintrag">
-                    <p id="itemName"> Brot </p>
-                    <form>
-                        <div id="checkBoxInput" >
-                        Gekauft?
-                        <input type="checkbox" name="NextPurchase" /> 
-                        <br>  
-                        </div>
-
-
-                        <div id="quantityInput"> Quantity
-                        <input type="number"  name="Stepper" step="1" min="1" max="100" value="1" required />
-                        <br> 
-                        </div>
-            
-                        <div id="commentInput"> Comment
-                        <textarea name="kommentar"  rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
-                        <br> 
-                        </div>
-
-                        <div id="date"> Last bought:
-                        <input type="date" name="today" value="2024-04-20">
-                        </div>
-
-                        <button id="deleteButton"> X </button>
-                        </form>
+            <legend>Your shoppinglist</legend>
+                        
+</form>
                        
 
                         

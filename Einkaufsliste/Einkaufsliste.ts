@@ -1,75 +1,82 @@
-window.addEventListener('load', function() {
-    const newEntryButton = document.getElementById('newEntry');
-    const productEntry = document.getElementById('productEntry');
+namespace Einkaufsliste {
+    window.addEventListener("load", handleLoad);
 
-    if (newEntryButton && productEntry) {
-        newEntryButton.addEventListener('click', function() {
-            // Neues Container-Div erstellen
-            const containerDiv = document.createElement('div');
-            containerDiv.classList.add('container');
+    function handleLoad(_event: Event): void {
+        console.log("Start");
 
-            console.log("Ein neuer Eintrag wurde hinzugefügt)");
+        form.addEventListener("change", handleChange);
 
-            // Neues Div-Element erstellen
-            const newDiv = document.createElement('div');
-            // Setze eine ID für das neue Container-Div
-            containerDiv.id = 'newContainer';
-
-            // Formular-Elemente erstellen und dem neuen Div hinzufügen
-            const formElements = `
-                <form>
-                    <label for="ware">Ware:</label>
-                    <input type="text" name="ware" required>
-                    <br> 
-
-                    <label for="anzahl">Anzahl:</label>
-                    <input type="number" name="anzahl" min="1" max="100" required>
-                    <br> 
-
-                    <label for="kommentar">Kommentar:</label>
-                    <textarea name="kommentar" rows="2" placeholder="Marke/Einheit/Farbe/..."></textarea>
-                    <br> 
-
-                    <label for="kaufen">Gekauft?</label>
-                    <input type="checkbox" name="gekauft">
-                    <br> 
-
-                    <label for="letzterKauf">Letzter Kauf:</label>
-                    <input type="date" name="letzterKauf">
-                    <br> 
-                    <button id="deleteButton" type="button"> X </button>
-                </form>
-            `;
-
-            newDiv.innerHTML = formElements;
-
-            // Dem Container-Div hinzufügen
-            containerDiv.appendChild(productEntry);
-            containerDiv.appendChild(newDiv);
-
-            // Dem Dokument hinzufügen
-            document.body.appendChild(containerDiv);
-
-            // Löschen des Divs bei Klick auf den Löschen-Button
-            const deleteButton = newDiv.querySelector('#deleteButton');
-            if (deleteButton) {
-                deleteButton.addEventListener('click', function() {
-                    containerDiv.remove();
-                    console.log("Ein Eintrag wurde entfernt");
-                });
+        function generateContent(_data:Item[]) {
+            // Füge für jedes Produkt einen Eintrag hinzu
+            for (let entry of _data){
+                addEntry(entry)                   
             }
-            // Änderungen im Formular anzeigen
-            const form = newDiv.querySelector('form');
-            if (form) {
-                form.addEventListener('change', function(event) {
-                    const target = event.target;
-                    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) {
-                        const name = target.name;
-                        const value = target.value;
-                        console.log(`Änderung in ${name}: ${value}`);
-                    }
-                });
+        }
+
+            generateContent(data);
+
+            export function addEntry(_product: Item): void {
+                const shoppingListDiv: HTMLDivElement = <HTMLDivElement>(
+                    document.getElementById("shoppingList")
+                );
+            
+                const entryDiv: HTMLDivElement = document.createElement("div");
+                entryDiv.id = "entry";
+            
+                entryDiv.innerHTML = `
+                    <p id="itemName">${_product.name}</p>
+                    <div id="wasBought">
+                        Bought?
+                        <input type="checkbox" name="NextPurchase" ${_product.wasBought ? "checked" : ""}/> 
+                    </div>
+                    <div id="quantityInput"> 
+                        Quantity
+                        <input type="number" name="Stepper" step="1" min="1" max="100" value="${_product.quantityInput}" required />
+                    </div>
+                    <div id="commentInput"> 
+                        Comment
+                        <textarea name="comment" rows="2" placeholder="details...">${_product.commentInput}</textarea>
+                    </div>
+                    <div id="date"> 
+                        Last bought: 
+                        <input type="date" name="today" value="${_product.date}">
+                        <button id="deleteButton"> X </button>
+                    </div>
+                `;
+            
+                shoppingListDiv.appendChild(entryDiv);
+
+
+                const deleteButton: HTMLButtonElement = <HTMLButtonElement>event.target;
+                // Finde das Elternelement des Löschbuttons, das den Eintrag darstellt
+                const entryDiv: HTMLDivElement = <HTMLDivElement>deleteButton.parentElement;
+                const newEntry: HTMLDivElement = <HTMLDivElement>entryDiv.parentElement;
+                if (deleteButton) {
+                    deleteButton.addEventListener('click', deleteEntry);
+}
+
+                function deleteEntry(event: MouseEvent): void {
+                    const deleteButton: HTMLButtonElement = <HTMLButtonElement>event.target;
+                    // Finde das Elternelement des Löschbuttons, das den Eintrag darstellt
+                    const entryDiv: HTMLDivElement = <HTMLDivElement>deleteButton.parentElement;
+                    // Entferne das Eintrags-Div aus dem DOM
+                    entryDiv.remove();
+                }
+                
+                
             }
-        });
+            
+        }
+    
+    // Funktion die durch Änderung am Formular aufgerufen wird
+    function handleChange(event: Event): void {
+        // Event Infos werden in der Konsole ausgegeben
+        console.log(event);
+
+        const input: HTMLInputElement = <HTMLInputElement>event.target;
+        console.log(input.value);
     }
-});
+
+    
+}
+
