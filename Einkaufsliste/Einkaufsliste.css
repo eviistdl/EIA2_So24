@@ -43,24 +43,44 @@ h1 {
     padding: 20px;
     margin: 10px;
 }
-input {
-    position: relative;
-    width: auto;
+#entry{
+    position: absolute;
+    left: calc(50vw - 70px);
+    width: 150px;
+    height: auto;
+    border-radius: 15px;
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+    margin: 15px;
+}
+.entry {
+    border: solid black;
+    padding:15px;
     border-radius: 20px;
-    border: 1px, black; 
 }
 
 #quantityInput, #date, #wasBought, #commentInput {
+    flex:1;
     margin: 3px;
-    display: inline-block;
-    border-radius: 20px;  
+    display: flex;
+    align-items: left;
+    border-radius: 5px;  
     padding: 5px;
-    background-color: #f1f1f1 ;
     flex-direction: row;
+}
+#commentInput {
+    width: 250px;
+}
+#quantitytInput {
+    width: 150px;
+}
+#commentAddItemInput{
+    width:auto;
 }
 #itemName {
     font-size: 15pt;
-    text-align: center;
+    text-align: left;
     font-family: arial;
 }
 
@@ -70,20 +90,21 @@ form {
     font-size: 10pt;
     display: flex;
     flex-direction: row;
-    margin: 15px;
 }
 
-#deleteButton{
+.deleteButton{
     width: 30px;
     height: 30px;
     text-align: center;
     border-radius: 50%; 
     color: white; 
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
     position: relative;
     font-weight: bold;
     position: relative;
+    flex:1;
+    margin: 3px;
+    display: flex;
+    align-items: center;
     padding: 10px;
     margin: 10px;
     background-color: rgb(0, 0, 0) 
@@ -97,38 +118,4 @@ textarea {
 	width: calc(100% - 10px);
 }
 
-label {
-    margin-bottom: 5px;
-}
 
-
-
-#newContainer{
-    left: calc(50vw - 150px);
-    display: flex;
-    flex-wrap: wrap; 
-    top: 50px;
-    position: relative;
-    width: 280px;
-    height: auto;
-
-    border-radius: 15px;
-    border: 2px solid black; 
-
-    padding: 15px;
-    margin-bottom: 10px;
-    display: flex; 
-    gap: 10px;
-}
-
-#newEntry{
-    position: absolute;
-    left: calc(50vw - 70px);
-    width: 150px;
-    height: auto;
-    border-radius: 15px;
-    border: 2px solid black;
-    text-align: center;
-    padding: 5px;
-    margin: 15px;
-}
