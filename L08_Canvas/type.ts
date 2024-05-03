@@ -5,65 +5,64 @@ document.addEventListener("DOMContentLoaded", function () {
     let canvas: HTMLCanvasElement = document.querySelector("canvas");
     let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
 
-        function fillBackround (): void{
-            crc2.fillStyle = "#4E2A20";
-            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-        }
-    fillBackround();
+    // Funktion zum Befüllen des Hintergrunds
+    function fillBackground(): void {
+        crc2.fillStyle = "#4E2A20";
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+    }
 
-        function drawCat (): void {
-            let random1: number = Math.round(Math.random() * 5) / 5;
-            let random2: number = Math.random();
-            
-            let randomRight: number =  330 + 100*random1;
-            let randomLeft: number =  270 - 100*random1;
-            let randomHeight: number =  -170 - 100 * random2;
-            
-            crc2.strokeStyle = "#FFFFFF";
-            crc2.translate(300,400)
-            crc2.beginPath();
-            crc2.moveTo(300,0);
-            crc2.lineTo(randomRight,0);
-            crc2.lineTo(randomRight,randomHeight);
-            crc2.lineTo((randomRight - 30),(randomHeight + 30));
-            crc2.lineTo((randomLeft + 30),(randomHeight + 30));
-            crc2.lineTo(randomLeft,randomHeight);
-            crc2.lineTo(randomLeft,0);
-            crc2.lineTo(300,0);
-            crc2.closePath();
-            crc2.stroke();
+  // Funktion zum Zeichnen einer Katze
+function drawCat(x: number): void {
+    let random1: number = Math.round(Math.random() * 5) / 5;
+    let random2: number = Math.random();
+    
+    let randomRight: number = 230 + 100 * random1;
+    let randomLeft: number = 170 - 100 * random1;
+    let randomHeight: number = -170 - 200 * random2;
+    
+    crc2.save();
+    
+    crc2.strokeStyle = "#FFFFFF";
+    crc2.translate(x, 400);
+    crc2.beginPath();
+    crc2.moveTo(200, 0);
+    crc2.lineTo(randomRight, 0);
+    crc2.lineTo(randomRight, randomHeight);
+    crc2.lineTo((randomRight - 30), (randomHeight + 30));
+    crc2.lineTo((randomLeft + 30), (randomHeight + 30));
+    crc2.lineTo(randomLeft, randomHeight);
+    crc2.lineTo(randomLeft, 0);
+    crc2.lineTo(200, 0);
+    crc2.closePath();
+    crc2.stroke();
+    
+    crc2.beginPath();
+    crc2.ellipse(220, (randomHeight + 60), 5, 5, 0, 365, 0);
+    crc2.closePath();
+    crc2.stroke();
+    
+    crc2.beginPath();
+    crc2.ellipse(180, (randomHeight + 60), 5, 5, 0, 365, 0);
+    crc2.closePath();
+    crc2.stroke();
 
-            crc2.beginPath();
-            crc2.ellipse(320, (randomHeight + 60), 5, 5, 0, 365, 0);
-            crc2.closePath();
-            crc2.stroke();
-
-            crc2.beginPath();
-            crc2.ellipse(280, (randomHeight + 60), 5, 5, 0, 365, 0);
-            crc2.closePath();
-            crc2.stroke();
-
-        } 
-
-        
-        //drawCat(); 
-        // Schleife, die drawCat fünfmal ausführt
-for (let i = 0; i < 5; i++) {
-    // Zufällige Position innerhalb des definierten Bereichs
-    let randomX: number = Math.random() * (700 - 100) + 100; // Zufällige x-Koordinate zwischen 100 und 700
-    let randomY: number = Math.random() * (800 - 300) + 300; // Zufällige y-Koordinate zwischen 300 und 800
-
-    // Setze die Translation auf die zufällige Position
-    crc2.translate(randomX, randomY);
-
-    // Zeichne die Katze
-    drawCat();
-
-    // Setze die Translation zurück
-    crc2.translate(-randomX, -randomY);
+    
+    // Beende den Pfad und setze die Transformation zurück
+    crc2.closePath();
+    crc2.restore();
 }
+   
+
+    fillBackground();
+
+    // Zeichne die erste Katze ohne Verschiebung
+    //drawCat();
+
+    
+    for (let i = 0; i < 4; i++) {
+        const xPosition = i * 250;
+        console.log(`Position von Katze ${i + 1}: ${xPosition}`);
+        drawCat(xPosition); 
+    }
 
 });
-
-
-
