@@ -1,4 +1,3 @@
-// Warte darauf, dass das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", function () {
 
     // Zugriff auf das Canvas-Element
@@ -6,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
 
 
-// Funktion zum Befüllen des Hintergrunds mit zufälligen Farben
+// Hintergrund einfärben
 function fillBackground(): void {
     console.log("Background");
 
-    // Generiere zufällige Farben im Bereich von #000000 bis #800359
+    // Generiere zufällige Farben
     let color1: string = getRandomColorInRange();
     let color2: string = getRandomColorInRange();
 
@@ -25,7 +24,7 @@ function fillBackground(): void {
 }
 
 
-// Funktion zum Generieren einer zufälligen Farbe im Bereich von #000000 bis #800359
+// Funktion zum Generieren einer zufälligen Farbe
 function getRandomColorInRange(): string {
     // Generiere zufällige RGB-Werte im Bereich von 0 bis 128
     let r: number = Math.floor(Math.random() * 129);
@@ -37,7 +36,7 @@ function getRandomColorInRange(): string {
     return hex;
 }
 
-// Hilfsfunktion zur Konvertierung einer RGB-Komponente in einen Hexadezimalwert
+// Von RGB in einen Hexadezimalwert
 function componentToHex(c: number): string {
     var hex: string = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
