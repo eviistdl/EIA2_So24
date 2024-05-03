@@ -4,12 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
     // Zugriff auf das Canvas-Element
     let canvas = document.querySelector("canvas");
     let crc2 = canvas.getContext("2d");
-    // Funktion zum Befüllen des Hintergrunds
+    // Funktion zum Befüllen des Hintergrunds mit zufälligen Farben
     function fillBackground() {
-        crc2.fillStyle = "#4E2A20";
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        console.log("Background");
+        // Generiere zufällige Farben im Bereich von #000000 bis #800359
+        let color1 = getRandomColorInRange();
+        let color2 = getRandomColorInRange();
+        // Erstelle den Gradienten mit den zufälligen Farben
+        let gradient = crc2.createLinearGradient(0, 10, 1200, 10);
+        gradient.addColorStop(0, color1);
+        gradient.addColorStop(1, color2);
+        // Fülle den Hintergrund mit dem Gradienten
+        crc2.fillStyle = gradient;
+        crc2.fillRect(0, 0, 1200, 600);
     }
-    // Funktion zum Zeichnen einer Katze
+    // Funktion zum Generieren einer zufälligen Farbe im Bereich von #000000 bis #800359
+    function getRandomColorInRange() {
+        // Generiere zufällige RGB-Werte im Bereich von 0 bis 128
+        let r = Math.floor(Math.random() * 129);
+        let g = Math.floor(Math.random() * 129);
+        let b = Math.floor(Math.random() * 89);
+        // Konvertiere die RGB-Werte in einen Hexadezimalwert
+        let hex = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        return hex;
+    }
+    // Hilfsfunktion zur Konvertierung einer RGB-Komponente in einen Hexadezimalwert
+    function componentToHex(c) {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
     function drawCat(x) {
         let random1 = Math.round(Math.random() * 5) / 5;
         let random2 = Math.random();
@@ -17,7 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let randomLeft = 170 - 100 * random1;
         let randomHeight = -170 - 200 * random2;
         crc2.save();
-        crc2.strokeStyle = "#FFFFFF";
+        // Wähle eine zufällige Farbe aus den angegebenen Optionen
+        let randomColorIndex = Math.floor(Math.random() * 4);
+        let randomColor = getRandomColor(randomColorIndex);
+        // Setze die Farbe für den Stroke und Fill Style
+        crc2.strokeStyle = "black";
+        crc2.fillStyle = randomColor;
+        // Zeichne die Katze
         crc2.translate(x, 400);
         crc2.beginPath();
         crc2.moveTo(200, 0);
@@ -30,24 +59,37 @@ document.addEventListener("DOMContentLoaded", function () {
         crc2.lineTo(200, 0);
         crc2.closePath();
         crc2.stroke();
+        crc2.fill();
         crc2.beginPath();
-        crc2.ellipse(220, (randomHeight + 60), 5, 5, 0, 365, 0);
+        crc2.ellipse(220, (randomHeight + 60), (3 + random2 * 10), (3 + random2 * 10), 0, 365, 0);
         crc2.closePath();
         crc2.stroke();
         crc2.beginPath();
-        crc2.ellipse(180, (randomHeight + 60), 5, 5, 0, 365, 0);
+        crc2.ellipse(180, (randomHeight + 60), (3 + random2 * 10), (3 + random2 * 10), 0, 365, 0);
         crc2.closePath();
         crc2.stroke();
         // Beende den Pfad und setze die Transformation zurück
         crc2.closePath();
         crc2.restore();
     }
+    // Funktion zum Erstellen eines zufälligen Farbindex
+    function getRandomColor(index) {
+        switch (index) {
+            case 0:
+                return "#F79A42"; // Erste Farboption
+            case 1:
+                return "#F6B67B"; // Zweite Farboption
+            case 2:
+                return "#F7D2AF"; // Dritte Farboption
+            case 3:
+                return "#F9EFE6"; // Vierte Farboption
+            default:
+                return "#F79A42"; // Standardfarbe, falls etwas schief geht
+        }
+    }
     fillBackground();
-    // Zeichne die erste Katze ohne Verschiebung
-    //drawCat();
     for (let i = 0; i < 4; i++) {
         const xPosition = i * 250;
-        console.log(`Position von Katze ${i + 1}: ${xPosition}`);
         drawCat(xPosition);
     }
 });
