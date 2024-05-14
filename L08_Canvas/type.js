@@ -1,8 +1,7 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
     // Zugriff auf das Canvas-Element
-    let canvas = document.querySelector("canvas");
-    let crc2 = canvas.getContext("2d");
+    let crc2;
     // Hintergrund einfärben
     function fillBackground() {
         console.log("Background");

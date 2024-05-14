@@ -1,22 +1,48 @@
+namespace L09_Pond{
 window.addEventListener("load", handleLoad);
 
-    let crc2: CanvasRenderingContext2D;
-
+    export let crc2: CanvasRenderingContext2D;
+    let clouds: Cloud[];
    
     function handleLoad(_event: Event): void {
-    // Zugriff auf das Canvas-Element
-    let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-    if (!canvas)
-        return;
-    crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-    
-    //Zeichnen der Elemente
-    fillBackground(); 
-    sun();
-    lake();
-    mountain();
-    cloud();
+
+        // Zugriff auf das Canvas-Element
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+        if (!canvas)
+            return;
+        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+        
+        //Cloud random auf x und y zeichnen
+        for (let i: number = 0; i < 10; i++){
+            let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200)
+            clouds.push(cloud);
+        }
+
+
+        drawBackround();
+        setInterval(animate, 40);
+        /*//Zeichnen der Elemente
+        fillBackground(); 
+        sun();
+        lake();
+        mountain();*/
+    }   
+
+    function animate(): void {
+            console.log("animate");
+            drawBackround();
+        for (let i: number = 0; i < 10; i++) {
+            clouds[i].move();
+            clouds[i].draw();
+        }
     }
+
+    function drawBackround(): void {
+            fillBackground(); 
+            sun();
+            lake();
+            mountain();
+        }
 
     // Hintergrund einfärben
     function fillBackground(): void {
@@ -105,9 +131,10 @@ window.addEventListener("load", handleLoad);
         crc2.fill();
     }
     
-    function cloud(): void {
+    /*function cloud(_x:number, _y: number): void {
+        crc2.save();
         // Ursprung Wolke 2
-        crc2.translate(20, 120);
+        crc2.translate(_x, _y);
     
     // Wolke zeichnen
         crc2.beginPath();
@@ -123,10 +150,10 @@ window.addEventListener("load", handleLoad);
         crc2.fill();
 
         // Setze den Ursprung zurück auf (0, 0)
-        crc2.translate(-20, -120);
+        crc2.restore();
 
         //Ursprung Wolke 2
-        crc2.translate(300, 150);
+        crc2.restore();
         
     //Wolke 2 zeichnen
         crc2.beginPath();
@@ -143,9 +170,9 @@ window.addEventListener("load", handleLoad);
 
         
         
-    }
+    }*/
     
-    
+}
     
     
     

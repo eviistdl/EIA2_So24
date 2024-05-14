@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // Zugriff auf das Canvas-Element
-    let canvas: HTMLCanvasElement = document.querySelector("canvas");
-    let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+    let crc2: CanvasRenderingContext2D;
 
 
 // Hintergrund einfärben
