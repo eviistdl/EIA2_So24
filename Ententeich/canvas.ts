@@ -2,7 +2,7 @@ namespace L09_Pond{
 window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
-    let clouds: Cloud[];
+    let clouds: Cloud[] = [];
    
     function handleLoad(_event: Event): void {
 

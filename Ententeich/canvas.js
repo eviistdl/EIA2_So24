@@ -2,7 +2,7 @@
 var L09_Pond;
 (function (L09_Pond) {
     window.addEventListener("load", handleLoad);
-    let clouds;
+    let clouds = [];
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
