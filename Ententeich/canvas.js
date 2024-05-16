@@ -3,6 +3,7 @@ var L09_Pond;
 (function (L09_Pond) {
     window.addEventListener("load", handleLoad);
     let clouds = [];
+    let ducks = [];
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
@@ -10,24 +11,42 @@ var L09_Pond;
             return;
         L09_Pond.crc2 = canvas.getContext("2d");
         //Cloud random auf x und y zeichnen
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             let cloud = new L09_Pond.Cloud(Math.random() * 500, Math.random() * 200);
             clouds.push(cloud);
         }
-        drawBackround();
-        setInterval(animate, 40);
-        /*//Zeichnen der Elemente
-        fillBackground();
-        sun();
-        lake();
-        mountain();*/
+        let duck = new L09_Pond.Duck(400, 400); // Startposition der Ente im See
+        ducks.push(duck);
+        drawTail();
+        setInterval(animate, 20);
+    }
+    function drawTail() {
+        console.log("tail draw");
+        L09_Pond.crc2.save();
+        L09_Pond.crc2.translate(350, 350);
+        // Dreieck zeichnen
+        L09_Pond.crc2.beginPath();
+        L09_Pond.crc2.moveTo(0, 0); // Startpunkt des Dreiecks
+        L09_Pond.crc2.lineTo(20, 0); // Linie zum Punkt (20, 0)
+        L09_Pond.crc2.arcTo(4, -20, 0, 0, 3); // Rundung hinzufügen (KontrollpunktX, KontrollpunktY, EndpunktX, EndpunktY, Radius)
+        L09_Pond.crc2.closePath(); // Schließe das Dreieck
+        // Füllfarbe und Randfarbe setzen
+        L09_Pond.crc2.fillStyle = "yellow";
+        L09_Pond.crc2.strokeStyle = "brown";
+        // Dreieck füllen und zeichnen
+        L09_Pond.crc2.fill();
+        L09_Pond.crc2.stroke();
+        L09_Pond.crc2.restore();
     }
     function animate() {
-        console.log("animate");
         drawBackround();
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 5; i++) {
             clouds[i].move();
             clouds[i].draw();
+        }
+        for (let i = 0; i < 3; i++) {
+            ducks[i].move();
+            ducks[i].draw();
         }
     }
     function drawBackround() {
@@ -35,10 +54,29 @@ var L09_Pond;
         sun();
         lake();
         mountain();
+        bush(80, 160);
+    }
+    function bush(_x, _y) {
+        L09_Pond.crc2.save();
+        L09_Pond.crc2.translate(_x, _y);
+        L09_Pond.crc2.translate(_x, _y);
+        // Busch zeichnen
+        L09_Pond.crc2.beginPath();
+        L09_Pond.crc2.ellipse(30, 0, 10, 20, 0, Math.PI, 0, false);
+        L09_Pond.crc2.ellipse(65, 0, 35, 50, 0, Math.PI, 0, false);
+        L09_Pond.crc2.ellipse(80, 0, 35, 60, 0, Math.PI, 0, false);
+        L09_Pond.crc2.ellipse(100, 0, 35, 60, 0, Math.PI, 0, false);
+        L09_Pond.crc2.ellipse(120, 0, 30, 30, 0, Math.PI, 0, false);
+        L09_Pond.crc2.closePath();
+        let bushColor = "green";
+        L09_Pond.crc2.fillStyle = bushColor;
+        L09_Pond.crc2.fill();
+        // Setze den Ursprung zurück
+        L09_Pond.crc2.restore();
     }
     // Hintergrund einfärben
     function fillBackground() {
-        console.log("Background");
+        console.log("wiese und Himmel gezeichnet");
         // Grünen Hintergrund zeichnen
         let grassColor = "#90E162";
         L09_Pond.crc2.fillStyle = grassColor;
@@ -49,6 +87,7 @@ var L09_Pond;
         L09_Pond.crc2.fillRect(0, 0, 600, 250);
     }
     function sun() {
+        console.log("sun gezeichnet");
         // Mittelpunkt und Durchmesser des Kreises
         let centerX = 500;
         let centerY = 100;
@@ -78,6 +117,7 @@ var L09_Pond;
         }
     }
     function lake() {
+        console.log("lake gezeichnet");
         // Mittelpunkt und Größe der Ellipse
         let centerX = 400;
         let centerY = 400;
@@ -92,6 +132,7 @@ var L09_Pond;
         L09_Pond.crc2.fill();
     }
     function mountain() {
+        console.log("mountain gezeichnet");
         // Berg zeichnen
         L09_Pond.crc2.beginPath();
         L09_Pond.crc2.moveTo(200, 250);
@@ -109,45 +150,5 @@ var L09_Pond;
         L09_Pond.crc2.fillStyle = mountainColorTwo;
         L09_Pond.crc2.fill();
     }
-    /*function cloud(_x:number, _y: number): void {
-        crc2.save();
-        // Ursprung Wolke 2
-        crc2.translate(_x, _y);
-    
-    // Wolke zeichnen
-        crc2.beginPath();
-        crc2.moveTo(150, 0);
-        crc2.lineTo(0, 0);
-        crc2.ellipse(50, 0, 40, 30, 0, Math.PI, 0, false);
-        crc2.ellipse(100, 0, 60, 60, 0, Math.PI, 0, false);
-        crc2.ellipse(170, 0, 50, 30, 0, Math.PI, 0, false);
-        crc2.closePath();
-    
-        let cloudColor: string = "white";
-        crc2.fillStyle = cloudColor;
-        crc2.fill();
-
-        // Setze den Ursprung zurück auf (0, 0)
-        crc2.restore();
-
-        //Ursprung Wolke 2
-        crc2.restore();
-        
-    //Wolke 2 zeichnen
-        crc2.beginPath();
-        crc2.moveTo(120, 0);
-        crc2.lineTo(0, 0);
-        crc2.ellipse(50, 0, 20, 20, 0, Math.PI, 0, false);
-        crc2.ellipse(100, 0, 40, 50, 0, Math.PI, 0, false);
-        crc2.ellipse(140, 0, 30, 30, 0, Math.PI, 0, false);
-        crc2.closePath();
-
-        let cloudColorTwo: string = "white"; // Weiße Farbe für die Wolke
-        crc2.fillStyle = cloudColorTwo;
-        crc2.fill();
-
-        
-        
-    }*/
 })(L09_Pond || (L09_Pond = {}));
 //# sourceMappingURL=canvas.js.map

@@ -3,6 +3,7 @@ window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
     let clouds: Cloud[] = [];
+    let ducks: Duck[] = [];
    
     function handleLoad(_event: Event): void {
 
@@ -13,27 +14,52 @@ window.addEventListener("load", handleLoad);
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         
         //Cloud random auf x und y zeichnen
-        for (let i: number = 0; i < 10; i++){
+        for (let i: number = 0; i < 5; i++){
             let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200)
             clouds.push(cloud);
         }
 
+          let duck: Duck = new Duck(400, 400); // Startposition der Ente im See
+            ducks.push(duck);
+        
+        drawTail();
+        setInterval(animate, 20);
+    }
 
-        drawBackround();
-        setInterval(animate, 40);
-        /*//Zeichnen der Elemente
-        fillBackground(); 
-        sun();
-        lake();
-        mountain();*/
-    }   
+    function drawTail() {
+        console.log("tail draw");
+        crc2.save();
+    
+        crc2.translate(350, 350);
+    
+        // Dreieck zeichnen
+        crc2.beginPath();
+        crc2.moveTo(0, 0); // Startpunkt des Dreiecks
+        crc2.lineTo(20, 0); // Linie zum Punkt (20, 0)
+        crc2.arcTo(4, -20, 0, 0, 3); // Rundung hinzufügen (KontrollpunktX, KontrollpunktY, EndpunktX, EndpunktY, Radius)
+        crc2.closePath(); // Schließe das Dreieck
+    
+        // Füllfarbe und Randfarbe setzen
+        crc2.fillStyle = "yellow";
+        crc2.strokeStyle = "brown";
+    
+        // Dreieck füllen und zeichnen
+        crc2.fill();
+        crc2.stroke();
+    
+        crc2.restore();
+    }
+        
 
     function animate(): void {
-            console.log("animate");
             drawBackround();
-        for (let i: number = 0; i < 10; i++) {
+        for (let i: number = 0; i < 5; i++) {
             clouds[i].move();
             clouds[i].draw();
+        }
+        for (let i: number = 0; i < 3; i++) {
+            ducks[i].move();
+            ducks[i].draw();
         }
     }
 
@@ -42,11 +68,38 @@ window.addEventListener("load", handleLoad);
             sun();
             lake();
             mountain();
+            bush(80, 160);
         }
+
+
+    function bush(_x:number, _y: number): void {
+        crc2.save();
+
+        crc2.translate(_x, _y);
+        crc2.translate(_x, _y);
+    
+    // Busch zeichnen
+        crc2.beginPath();
+        crc2.ellipse(30, 0, 10, 20, 0, Math.PI, 0, false);
+        crc2.ellipse(65, 0, 35, 50, 0, Math.PI, 0, false);
+        crc2.ellipse(80, 0, 35, 60, 0, Math.PI, 0, false);
+        crc2.ellipse(100, 0, 35, 60, 0, Math.PI, 0, false);
+        crc2.ellipse(120, 0, 30, 30, 0, Math.PI, 0, false);
+        crc2.closePath();
+    
+        let bushColor: string = "green"; 
+        crc2.fillStyle = bushColor;
+        crc2.fill();
+
+        // Setze den Ursprung zurück
+        crc2.restore();
+
+
+    }
 
     // Hintergrund einfärben
     function fillBackground(): void {
-        console.log("Background");
+        console.log("wiese und Himmel gezeichnet")
     
         // Grünen Hintergrund zeichnen
         let grassColor: string = "#90E162"; 
@@ -60,6 +113,7 @@ window.addEventListener("load", handleLoad);
     }
 
     function sun(): void {
+        console.log("sun gezeichnet")
         // Mittelpunkt und Durchmesser des Kreises
         let centerX: number = 500;
         let centerY: number = 100;
@@ -93,6 +147,7 @@ window.addEventListener("load", handleLoad);
     }
 
     function lake(): void {
+        console.log("lake gezeichnet")
         // Mittelpunkt und Größe der Ellipse
         let centerX: number = 400;
         let centerY: number = 400;
@@ -110,6 +165,7 @@ window.addEventListener("load", handleLoad);
     }
 
     function mountain(): void {
+        console.log("mountain gezeichnet")
         // Berg zeichnen
         crc2.beginPath();
         crc2.moveTo(200, 250);
@@ -131,47 +187,7 @@ window.addEventListener("load", handleLoad);
         crc2.fill();
     }
     
-    /*function cloud(_x:number, _y: number): void {
-        crc2.save();
-        // Ursprung Wolke 2
-        crc2.translate(_x, _y);
-    
-    // Wolke zeichnen
-        crc2.beginPath();
-        crc2.moveTo(150, 0);
-        crc2.lineTo(0, 0); 
-        crc2.ellipse(50, 0, 40, 30, 0, Math.PI, 0, false);
-        crc2.ellipse(100, 0, 60, 60, 0, Math.PI, 0, false);
-        crc2.ellipse(170, 0, 50, 30, 0, Math.PI, 0, false);
-        crc2.closePath();
-    
-        let cloudColor: string = "white"; 
-        crc2.fillStyle = cloudColor;
-        crc2.fill();
 
-        // Setze den Ursprung zurück auf (0, 0)
-        crc2.restore();
-
-        //Ursprung Wolke 2
-        crc2.restore();
-        
-    //Wolke 2 zeichnen
-        crc2.beginPath();
-        crc2.moveTo(120, 0);
-        crc2.lineTo(0, 0); 
-        crc2.ellipse(50, 0, 20, 20, 0, Math.PI, 0, false);
-        crc2.ellipse(100, 0, 40, 50, 0, Math.PI, 0, false);
-        crc2.ellipse(140, 0, 30, 30, 0, Math.PI, 0, false);
-        crc2.closePath();
-
-        let cloudColorTwo: string = "white"; // Weiße Farbe für die Wolke
-        crc2.fillStyle = cloudColorTwo;
-        crc2.fill();
-
-        
-        
-    }*/
-    
 }
     
     
