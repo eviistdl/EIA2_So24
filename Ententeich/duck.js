@@ -8,22 +8,21 @@ var L09_Pond;
         constructor(_x, _y) {
             this.x = _x;
             this.y = _y;
-            this.direction = 1; // 1 für rechts, -1 für links
+            this.direction = 1;
         }
         move() {
-            console.log("duck move");
+            //console.log("duck move");
             this.x += 1 * this.direction;
-            // Wenn die Ente 150 Pixel nach rechts bewegt wurde, wechsle die Richtung
-            if (this.x > 550) {
+            // Wenn die Ente bei 500 auf x, wechsle die Richtung
+            if (this.x > 500) {
                 this.direction = -1;
             }
-            // Wenn die Ente 150 Pixel nach links bewegt wurde, wechsle die Richtung
-            if (this.x < 250) {
+            if (this.x < 270) {
                 this.direction = 1;
             }
         }
         draw() {
-            console.log("duck draw");
+            //console.log("duck draw");
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
             // Körper der Ente

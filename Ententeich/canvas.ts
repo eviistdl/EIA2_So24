@@ -1,84 +1,70 @@
-namespace L09_Pond{
-window.addEventListener("load", handleLoad);
+namespace L09_Pond {
+    window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
     let clouds: Cloud[] = [];
     let ducks: Duck[] = [];
-   
-    function handleLoad(_event: Event): void {
+    let tails: Tail[] = [];
 
+    function handleLoad(_event: Event): void {
         // Zugriff auf das Canvas-Element
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         
-        //Cloud random auf x und y zeichnen
-        for (let i: number = 0; i < 5; i++){
-            let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200)
+        // Clouds random auf x und y zeichnen
+        for (let i: number = 0; i < 5; i++) {
+            let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200);
             clouds.push(cloud);
         }
 
-          let duck: Duck = new Duck(400, 400); // Startposition der Ente im See
+        // Tails initialisieren
+        for (let i: number = 0; i < 2; i++) {
+            let tail: Tail = new Tail(350 + Math.random() * 50, 320 + Math.random() * 70); // Startposition
+            tails.push(tail);
+        }
+
+        // Ducks initialisieren
+        for (let i: number = 0; i < 2; i++) {
+            let duck: Duck = new Duck(50 + Math.random() * 400, 400 + Math.random() * 50); // Startposition
             ducks.push(duck);
+        }
+
         
-        drawTail();
+
         setInterval(animate, 20);
     }
 
-    function drawTail() {
-        console.log("tail draw");
-        crc2.save();
-    
-        crc2.translate(350, 350);
-    
-        // Dreieck zeichnen
-        crc2.beginPath();
-        crc2.moveTo(0, 0); // Startpunkt des Dreiecks
-        crc2.lineTo(20, 0); // Linie zum Punkt (20, 0)
-        crc2.arcTo(4, -20, 0, 0, 3); // Rundung hinzufügen (KontrollpunktX, KontrollpunktY, EndpunktX, EndpunktY, Radius)
-        crc2.closePath(); // Schließe das Dreieck
-    
-        // Füllfarbe und Randfarbe setzen
-        crc2.fillStyle = "yellow";
-        crc2.strokeStyle = "brown";
-    
-        // Dreieck füllen und zeichnen
-        crc2.fill();
-        crc2.stroke();
-    
-        crc2.restore();
-    }
-        
-
     function animate(): void {
-            drawBackround();
-        for (let i: number = 0; i < 5; i++) {
+        drawBackround();
+        for (let i: number = 0; i < clouds.length; i++) {
             clouds[i].move();
             clouds[i].draw();
         }
-        for (let i: number = 0; i < 3; i++) {
+        for (let i: number = 0; i < ducks.length; i++) {
             ducks[i].move();
             ducks[i].draw();
+        }
+        for (let i: number = 0; i < tails.length; i++) {
+            tails[i].move();
+            tails[i].draw();
         }
     }
 
     function drawBackround(): void {
-            fillBackground(); 
-            sun();
-            lake();
-            mountain();
-            bush(80, 160);
-        }
-
+        fillBackground(); 
+        sun();
+        lake();
+        mountain();
+        bush(100, 320);
+    }
 
     function bush(_x:number, _y: number): void {
         crc2.save();
+        crc2.translate(_x, _y);
 
-        crc2.translate(_x, _y);
-        crc2.translate(_x, _y);
-    
-    // Busch zeichnen
+        // Busch zeichnen
         crc2.beginPath();
         crc2.ellipse(30, 0, 10, 20, 0, Math.PI, 0, false);
         crc2.ellipse(65, 0, 35, 50, 0, Math.PI, 0, false);
@@ -91,16 +77,11 @@ window.addEventListener("load", handleLoad);
         crc2.fillStyle = bushColor;
         crc2.fill();
 
-        // Setze den Ursprung zurück
         crc2.restore();
-
-
     }
 
     // Hintergrund einfärben
     function fillBackground(): void {
-        console.log("wiese und Himmel gezeichnet")
-    
         // Grünen Hintergrund zeichnen
         let grassColor: string = "#90E162"; 
         crc2.fillStyle = grassColor;
@@ -113,7 +94,6 @@ window.addEventListener("load", handleLoad);
     }
 
     function sun(): void {
-        console.log("sun gezeichnet")
         // Mittelpunkt und Durchmesser des Kreises
         let centerX: number = 500;
         let centerY: number = 100;
@@ -147,7 +127,6 @@ window.addEventListener("load", handleLoad);
     }
 
     function lake(): void {
-        console.log("lake gezeichnet")
         // Mittelpunkt und Größe der Ellipse
         let centerX: number = 400;
         let centerY: number = 400;
@@ -165,7 +144,6 @@ window.addEventListener("load", handleLoad);
     }
 
     function mountain(): void {
-        console.log("mountain gezeichnet")
         // Berg zeichnen
         crc2.beginPath();
         crc2.moveTo(200, 250);
@@ -186,15 +164,4 @@ window.addEventListener("load", handleLoad);
         crc2.fillStyle = mountainColorTwo;
         crc2.fill();
     }
-    
-
 }
-    
-    
-    
-    
-    
-    
-    
-    
-

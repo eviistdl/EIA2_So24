@@ -7,25 +7,24 @@ namespace L09_Pond {
         constructor(_x: number, _y: number) {
             this.x = _x;
             this.y = _y;
-            this.direction = 1; // 1 für rechts, -1 für links
+            this.direction = 1; 
         }
 
         move(): void {
-            console.log("duck move");
+            //console.log("duck move");
             this.x += 1 * this.direction;
 
-            // Wenn die Ente 150 Pixel nach rechts bewegt wurde, wechsle die Richtung
-            if (this.x > 550) {
+            // Wenn die Ente bei 500 auf x, wechsle die Richtung
+            if (this.x > 500) {
                 this.direction = -1;
             }
-            // Wenn die Ente 150 Pixel nach links bewegt wurde, wechsle die Richtung
-            if (this.x < 250) {
+            if (this.x < 270) {
                 this.direction = 1;
             }
         }
 
         draw(): void {
-            console.log("duck draw");
+            //console.log("duck draw");
             crc2.save();
 
             crc2.translate(this.x, this.y);

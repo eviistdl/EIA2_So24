@@ -4,49 +4,43 @@ var L09_Pond;
     window.addEventListener("load", handleLoad);
     let clouds = [];
     let ducks = [];
+    let tails = [];
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         L09_Pond.crc2 = canvas.getContext("2d");
-        //Cloud random auf x und y zeichnen
+        // Clouds random auf x und y zeichnen
         for (let i = 0; i < 5; i++) {
             let cloud = new L09_Pond.Cloud(Math.random() * 500, Math.random() * 200);
             clouds.push(cloud);
         }
-        let duck = new L09_Pond.Duck(400, 400); // Startposition der Ente im See
-        ducks.push(duck);
-        drawTail();
+        // Tails initialisieren
+        for (let i = 0; i < 2; i++) {
+            let tail = new L09_Pond.Tail(350 + Math.random() * 50, 320 + Math.random() * 70); // Startposition
+            tails.push(tail);
+        }
+        // Ducks initialisieren
+        for (let i = 0; i < 2; i++) {
+            let duck = new L09_Pond.Duck(50 + Math.random() * 400, 400 + Math.random() * 50); // Startposition
+            ducks.push(duck);
+        }
         setInterval(animate, 20);
-    }
-    function drawTail() {
-        console.log("tail draw");
-        L09_Pond.crc2.save();
-        L09_Pond.crc2.translate(350, 350);
-        // Dreieck zeichnen
-        L09_Pond.crc2.beginPath();
-        L09_Pond.crc2.moveTo(0, 0); // Startpunkt des Dreiecks
-        L09_Pond.crc2.lineTo(20, 0); // Linie zum Punkt (20, 0)
-        L09_Pond.crc2.arcTo(4, -20, 0, 0, 3); // Rundung hinzufügen (KontrollpunktX, KontrollpunktY, EndpunktX, EndpunktY, Radius)
-        L09_Pond.crc2.closePath(); // Schließe das Dreieck
-        // Füllfarbe und Randfarbe setzen
-        L09_Pond.crc2.fillStyle = "yellow";
-        L09_Pond.crc2.strokeStyle = "brown";
-        // Dreieck füllen und zeichnen
-        L09_Pond.crc2.fill();
-        L09_Pond.crc2.stroke();
-        L09_Pond.crc2.restore();
     }
     function animate() {
         drawBackround();
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < clouds.length; i++) {
             clouds[i].move();
             clouds[i].draw();
         }
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < ducks.length; i++) {
             ducks[i].move();
             ducks[i].draw();
+        }
+        for (let i = 0; i < tails.length; i++) {
+            tails[i].move();
+            tails[i].draw();
         }
     }
     function drawBackround() {
@@ -54,11 +48,10 @@ var L09_Pond;
         sun();
         lake();
         mountain();
-        bush(80, 160);
+        bush(100, 320);
     }
     function bush(_x, _y) {
         L09_Pond.crc2.save();
-        L09_Pond.crc2.translate(_x, _y);
         L09_Pond.crc2.translate(_x, _y);
         // Busch zeichnen
         L09_Pond.crc2.beginPath();
@@ -71,12 +64,10 @@ var L09_Pond;
         let bushColor = "green";
         L09_Pond.crc2.fillStyle = bushColor;
         L09_Pond.crc2.fill();
-        // Setze den Ursprung zurück
         L09_Pond.crc2.restore();
     }
     // Hintergrund einfärben
     function fillBackground() {
-        console.log("wiese und Himmel gezeichnet");
         // Grünen Hintergrund zeichnen
         let grassColor = "#90E162";
         L09_Pond.crc2.fillStyle = grassColor;
@@ -87,7 +78,6 @@ var L09_Pond;
         L09_Pond.crc2.fillRect(0, 0, 600, 250);
     }
     function sun() {
-        console.log("sun gezeichnet");
         // Mittelpunkt und Durchmesser des Kreises
         let centerX = 500;
         let centerY = 100;
@@ -117,7 +107,6 @@ var L09_Pond;
         }
     }
     function lake() {
-        console.log("lake gezeichnet");
         // Mittelpunkt und Größe der Ellipse
         let centerX = 400;
         let centerY = 400;
@@ -132,7 +121,6 @@ var L09_Pond;
         L09_Pond.crc2.fill();
     }
     function mountain() {
-        console.log("mountain gezeichnet");
         // Berg zeichnen
         L09_Pond.crc2.beginPath();
         L09_Pond.crc2.moveTo(200, 250);

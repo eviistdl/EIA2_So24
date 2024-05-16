@@ -9,8 +9,12 @@ var L09_Pond;
             this.y = _y;
         }
         move() {
-            console.log("cloud move");
+            //console.log("cloud move");
             this.x += 1;
+            // Wenn die Wolke aus dem Bild fliegt, setze sie wieder an den Anfang
+            if (this.x > L09_Pond.crc2.canvas.width) {
+                this.x = -170; // Setze die Wolke außerhalb des linken Rands des Canvas
+            }
         }
         draw() {
             L09_Pond.crc2.save();
@@ -26,7 +30,6 @@ var L09_Pond;
             let cloudColor = "white";
             L09_Pond.crc2.fillStyle = cloudColor;
             L09_Pond.crc2.fill();
-            // Setze den Ursprung zurück auf (0, 0)
             L09_Pond.crc2.restore();
         }
     }
