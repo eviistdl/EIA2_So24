@@ -49,6 +49,28 @@ var L09_Pond;
         lake();
         mountain();
         bush(100, 320);
+        drawTree(50, 300);
+    }
+    function drawTree(_x, _y) {
+        L09_Pond.crc2.save();
+        L09_Pond.crc2.translate(_x, _y);
+        // Stamm des Baums zeichnen
+        L09_Pond.crc2.beginPath();
+        L09_Pond.crc2.rect(-10, 0, 20, 50);
+        L09_Pond.crc2.closePath();
+        let trunkColor = "#8B4513";
+        L09_Pond.crc2.fillStyle = trunkColor;
+        L09_Pond.crc2.fill();
+        // Blätter des Baums zeichnen
+        L09_Pond.crc2.beginPath();
+        L09_Pond.crc2.ellipse(0, -30, 35, 60, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.ellipse(0, -70, 30, 50, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.ellipse(0, -100, 25, 40, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.closePath();
+        let leafColor = "green";
+        L09_Pond.crc2.fillStyle = leafColor;
+        L09_Pond.crc2.fill();
+        L09_Pond.crc2.restore();
     }
     function bush(_x, _y) {
         L09_Pond.crc2.save();

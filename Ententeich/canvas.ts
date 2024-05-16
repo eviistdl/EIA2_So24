@@ -32,7 +32,6 @@ namespace L09_Pond {
         }
 
         
-
         setInterval(animate, 20);
     }
 
@@ -58,7 +57,36 @@ namespace L09_Pond {
         lake();
         mountain();
         bush(100, 320);
+        drawTree(50, 300);
     }
+
+    function drawTree(_x: number, _y: number): void {
+        crc2.save();
+        crc2.translate(_x, _y);
+
+        // Stamm des Baums zeichnen
+        crc2.beginPath();
+        crc2.rect(-10, 0, 20, 50); 
+        crc2.closePath();
+
+        let trunkColor: string = "#8B4513"; 
+        crc2.fillStyle = trunkColor;
+        crc2.fill();
+
+        // Blätter des Baums zeichnen
+        crc2.beginPath();
+        crc2.ellipse(0, -30, 35, 60, 0, 0, 2 * Math.PI); 
+        crc2.ellipse(0, -70, 30, 50, 0, 0, 2 * Math.PI); 
+        crc2.ellipse(0, -100, 25, 40, 0, 0, 2 * Math.PI); 
+        crc2.closePath();
+
+        let leafColor: string = "green"; 
+        crc2.fillStyle = leafColor;
+        crc2.fill();
+
+        crc2.restore();
+    }
+
 
     function bush(_x:number, _y: number): void {
         crc2.save();
