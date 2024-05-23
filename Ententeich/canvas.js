@@ -5,31 +5,51 @@ var L09_Pond;
     let clouds = [];
     let ducks = [];
     let tails = [];
+    let flamingos = [];
+    let ladybugs = [];
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         L09_Pond.crc2 = canvas.getContext("2d");
+        // Ladybugs zeichnen
+        for (let i = 0; i < 5; i++) {
+            let randomX = Math.random() * canvas.width;
+            let randomY = Math.random() * canvas.height;
+            let ladybug = new L09_Pond.Ladybug(randomX, randomY);
+            ladybugs.push(ladybug);
+        }
         // Clouds random auf x und y zeichnen
         for (let i = 0; i < 5; i++) {
             let cloud = new L09_Pond.Cloud(Math.random() * 500, Math.random() * 200);
             clouds.push(cloud);
         }
-        // Tails initialisieren
-        for (let i = 0; i < 2; i++) {
-            let tail = new L09_Pond.Tail(350 + Math.random() * 50, 320 + Math.random() * 70); // Startposition
+        // Tails zeichnen
+        for (let i = 0; i < 3; i++) {
+            let tail = new L09_Pond.Tail(350 + Math.random() * 50, 330 + Math.random() * 80); // Startposition
             tails.push(tail);
         }
-        // Ducks initialisieren
-        for (let i = 0; i < 2; i++) {
-            let duck = new L09_Pond.Duck(50 + Math.random() * 400, 400 + Math.random() * 50); // Startposition
+        // Ducks zeichnen
+        for (let i = 0; i < 3; i++) {
+            let duck = new L09_Pond.Duck(350 + Math.random() * 50, 400 + Math.random() * 50); // Startposition
             ducks.push(duck);
+        }
+        //Flamingo zeichnen
+        for (let i = 0; i < 4; i++) {
+            let randomX = 10 + Math.random() * 250; // Zufällige x-Position zwischen 10 und 50
+            let randomY = 300 + Math.random() * 250; // Zufällige y-Position zwischen 300 und 550
+            let flamingo = new L09_Pond.Flamingo(randomX, randomY);
+            flamingos.push(flamingo);
         }
         setInterval(animate, 20);
     }
     function animate() {
         drawBackround();
+        for (let i = 0; i < ladybugs.length; i++) {
+            ladybugs[i].move();
+            ladybugs[i].draw();
+        }
         for (let i = 0; i < clouds.length; i++) {
             clouds[i].move();
             clouds[i].draw();
@@ -42,6 +62,10 @@ var L09_Pond;
             tails[i].move();
             tails[i].draw();
         }
+        for (let flamingo of flamingos) {
+            flamingo.move();
+            flamingo.draw();
+        }
     }
     function drawBackround() {
         fillBackground();
@@ -49,23 +73,25 @@ var L09_Pond;
         lake();
         mountain();
         bush(100, 320);
-        drawTree(50, 300);
+        bush(300, 300);
+        bush(460, 320);
+        drawTree();
     }
-    function drawTree(_x, _y) {
+    function drawTree() {
         L09_Pond.crc2.save();
-        L09_Pond.crc2.translate(_x, _y);
-        // Stamm des Baums zeichnen
+        L09_Pond.crc2.translate(40, 300);
+        // Stamm
         L09_Pond.crc2.beginPath();
         L09_Pond.crc2.rect(-10, 0, 20, 50);
         L09_Pond.crc2.closePath();
         let trunkColor = "#8B4513";
         L09_Pond.crc2.fillStyle = trunkColor;
         L09_Pond.crc2.fill();
-        // Blätter des Baums zeichnen
+        // Blätter
         L09_Pond.crc2.beginPath();
-        L09_Pond.crc2.ellipse(0, -30, 35, 60, 0, 0, 2 * Math.PI);
-        L09_Pond.crc2.ellipse(0, -70, 30, 50, 0, 0, 2 * Math.PI);
-        L09_Pond.crc2.ellipse(0, -100, 25, 40, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.ellipse(0, -20, 35, 60, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.ellipse(0, -50, 30, 50, 0, 0, 2 * Math.PI);
+        L09_Pond.crc2.ellipse(0, -70, 25, 40, 0, 0, 2 * Math.PI);
         L09_Pond.crc2.closePath();
         let leafColor = "green";
         L09_Pond.crc2.fillStyle = leafColor;
@@ -130,10 +156,10 @@ var L09_Pond;
     }
     function lake() {
         // Mittelpunkt und Größe der Ellipse
-        let centerX = 400;
-        let centerY = 400;
-        let radiusX = 150;
-        let radiusY = 75;
+        let centerX = 430;
+        let centerY = 410;
+        let radiusX = 160;
+        let radiusY = 90;
         // Ellipse zeichnen
         L09_Pond.crc2.beginPath();
         L09_Pond.crc2.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);

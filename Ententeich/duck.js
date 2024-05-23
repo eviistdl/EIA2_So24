@@ -8,7 +8,7 @@ var L09_Pond;
         constructor(_x, _y) {
             this.x = _x;
             this.y = _y;
-            this.direction = 1;
+            this.direction = Math.random() < 0.5 ? -1 : 1; // Zufällige Richtung
         }
         move() {
             //console.log("duck move");
@@ -25,7 +25,7 @@ var L09_Pond;
             //console.log("duck draw");
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
-            // Körper der Ente
+            // Körper
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.ellipse(0, 0, 25, 12, 0, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
@@ -33,13 +33,13 @@ var L09_Pond;
             L09_Pond.crc2.fill();
             L09_Pond.crc2.strokeStyle = "yellow";
             L09_Pond.crc2.stroke();
-            // Kopf der Ente
+            // Kopf
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.arc(20, -20, 10, 0, 2 * Math.PI); // Kopf
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "yellow";
             L09_Pond.crc2.fill();
-            // Schnabel der Ente
+            // Schnabel
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(30, -24);
             L09_Pond.crc2.lineTo(28, -12);
@@ -49,7 +49,7 @@ var L09_Pond;
             L09_Pond.crc2.fill();
             L09_Pond.crc2.strokeStyle = "brown";
             L09_Pond.crc2.stroke();
-            // Auge der Ente
+            // Auge
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.arc(24, -20, 2, 0, 2 * Math.PI); // Auge
             L09_Pond.crc2.closePath();

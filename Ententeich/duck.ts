@@ -7,7 +7,7 @@ namespace L09_Pond {
         constructor(_x: number, _y: number) {
             this.x = _x;
             this.y = _y;
-            this.direction = 1; 
+            this.direction = Math.random() < 0.5 ? -1 : 1; // Zufällige Richtung
         }
 
         move(): void {
@@ -29,7 +29,7 @@ namespace L09_Pond {
 
             crc2.translate(this.x, this.y);
 
-            // Körper der Ente
+            // Körper
             crc2.beginPath();
             crc2.ellipse(0, 0, 25, 12, 0, 0, 2 * Math.PI);
             crc2.closePath();
@@ -39,14 +39,14 @@ namespace L09_Pond {
             crc2.strokeStyle = "yellow";
             crc2.stroke();
 
-            // Kopf der Ente
+            // Kopf
             crc2.beginPath();
             crc2.arc(20, -20, 10, 0, 2 * Math.PI); // Kopf
             crc2.closePath();
             crc2.fillStyle = "yellow";
             crc2.fill();
 
-            // Schnabel der Ente
+            // Schnabel
             crc2.beginPath();
             crc2.moveTo(30, -24);
             crc2.lineTo(28, -12);
@@ -57,7 +57,7 @@ namespace L09_Pond {
             crc2.strokeStyle = "brown";
             crc2.stroke();
 
-            // Auge der Ente
+            // Auge
             crc2.beginPath();
             crc2.arc(24, -20, 2, 0, 2 * Math.PI); // Auge
             crc2.closePath();
