@@ -9,8 +9,8 @@ var L09_Pond;
         constructor(_x, _y) {
             this.x = _x;
             this.y = _y;
-            this.speedX = Math.random() * 2 - 1; // Zufällige Geschwindigkeit in x-Richtung
-            this.speedY = Math.random() * 2 - 1; // Zufällige Geschwindigkeit in y-Richtung
+            this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
+            this.speedY = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }
         move() {
             console.log("ladybug draw");
@@ -28,35 +28,63 @@ var L09_Pond;
         draw() {
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
-            // Körper 
+            //Fühler
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.ellipse(0, 0, 15, 12, 0, 0, 2 * Math.PI);
+            L09_Pond.crc2.moveTo(-10, -3);
+            L09_Pond.crc2.lineTo(-25, 0);
+            L09_Pond.crc2.strokeStyle = "black";
+            L09_Pond.crc2.lineWidth = 2;
+            L09_Pond.crc2.stroke();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.moveTo(-6, -10);
+            L09_Pond.crc2.lineTo(-17, -25);
+            L09_Pond.crc2.strokeStyle = "black";
+            L09_Pond.crc2.lineWidth = 2;
+            L09_Pond.crc2.stroke();
+            // Körper
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.ellipse(2, -2, 12, 12, -2, 0, 2 * Math.PI, false);
+            L09_Pond.crc2.closePath();
+            L09_Pond.crc2.fillStyle = "black";
+            L09_Pond.crc2.fill();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.ellipse(0, 0, 15, 12, 20, 0, Math.PI, false);
+            L09_Pond.crc2.closePath();
+            L09_Pond.crc2.fillStyle = "red";
+            L09_Pond.crc2.fill();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.ellipse(5, -5, 15, 12, 22, 0, Math.PI, false);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "red";
             L09_Pond.crc2.fill();
             // Schwarze Punkte auf dem Körper
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.arc(-5, -5, 3, 0, 2 * Math.PI);
-            L09_Pond.crc2.arc(-5, 5, 3, 0, 2 * Math.PI);
-            L09_Pond.crc2.arc(0, 0, 2, 0, 2 * Math.PI);
+            L09_Pond.crc2.arc(-7, -2, 3, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "black";
             L09_Pond.crc2.fill();
-            // Fühler
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.moveTo(-10, -15); // linker Fühler
-            L09_Pond.crc2.lineTo(-20, -30);
-            L09_Pond.crc2.strokeStyle = "black";
-            L09_Pond.crc2.lineWidth = 1;
-            L09_Pond.crc2.stroke();
+            L09_Pond.crc2.arc(-3, 8, 3, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
+            L09_Pond.crc2.fillStyle = "black";
+            L09_Pond.crc2.fill();
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.moveTo(10, -15); // rechter Fühler
-            L09_Pond.crc2.lineTo(20, -30);
-            L09_Pond.crc2.strokeStyle = "black";
-            L09_Pond.crc2.lineWidth = 1;
-            L09_Pond.crc2.stroke();
+            L09_Pond.crc2.arc(1, -10, 3, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
+            L09_Pond.crc2.fillStyle = "black";
+            L09_Pond.crc2.fill();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.arc(10, -9, 3, 0, 2 * Math.PI);
+            L09_Pond.crc2.closePath();
+            L09_Pond.crc2.fillStyle = "black";
+            L09_Pond.crc2.fill();
+            //Fühler
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.moveTo(-10, -3);
+            L09_Pond.crc2.lineTo(-25, 0);
+            L09_Pond.crc2.strokeStyle = "black";
+            L09_Pond.crc2.lineWidth = 2;
+            L09_Pond.crc2.stroke();
             L09_Pond.crc2.restore();
         }
     }

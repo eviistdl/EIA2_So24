@@ -15,7 +15,7 @@ namespace L09_Pond {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         
-        // Ladybugs zeichnen
+        // Ladybugs generieren
         for (let i: number = 0; i < 5; i++) {
             let randomX: number = Math.random() * canvas.width;
             let randomY: number = Math.random() * canvas.height;
@@ -29,19 +29,19 @@ namespace L09_Pond {
             clouds.push(cloud);
         }
 
-        // Tails zeichnen
+        // Tails generieren
         for (let i: number = 0; i < 3; i++) {
             let tail: Tail = new Tail(350 + Math.random() * 50, 330 + Math.random() * 80); // Startposition
             tails.push(tail);
         }
 
-        // Ducks zeichnen
+        // Ducks generieren
         for (let i: number = 0; i < 3; i++) {
             let duck: Duck = new Duck(350 + Math.random() * 50, 400 + Math.random() * 50); // Startposition
             ducks.push(duck);
         }
 
-        //Flamingo zeichnen
+        //Flamingo generieren
         for (let i: number = 0; i < 4; i++) {
             let randomX: number = 10 + Math.random() * 250; // Zufällige x-Position zwischen 10 und 50
             let randomY: number = 300 + Math.random() * 250; // Zufällige y-Position zwischen 300 und 550
@@ -55,25 +55,27 @@ namespace L09_Pond {
 
     function animate(): void {
         drawBackround();
-        for (let i: number = 0; i< ladybugs.length; i++) {
-            ladybugs[i].move();
-            ladybugs[i].draw();
-        }
+        
         for (let i: number = 0; i < clouds.length; i++) {
             clouds[i].move();
             clouds[i].draw();
+        }
+        
+        for (let i: number = 0; i < tails.length; i++) {
+            tails[i].move();
+            tails[i].draw();
         }
         for (let i: number = 0; i < ducks.length; i++) {
             ducks[i].move();
             ducks[i].draw();
         }
-        for (let i: number = 0; i < tails.length; i++) {
-            tails[i].move();
-            tails[i].draw();
-        }
         for (let flamingo of flamingos) {
             flamingo.move();
             flamingo.draw();
+        }
+        for (let i: number = 0; i< ladybugs.length; i++) {
+            ladybugs[i].move();
+            ladybugs[i].draw();
         }
     }
 

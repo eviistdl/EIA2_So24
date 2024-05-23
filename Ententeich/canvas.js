@@ -13,7 +13,7 @@ var L09_Pond;
         if (!canvas)
             return;
         L09_Pond.crc2 = canvas.getContext("2d");
-        // Ladybugs zeichnen
+        // Ladybugs generieren
         for (let i = 0; i < 5; i++) {
             let randomX = Math.random() * canvas.width;
             let randomY = Math.random() * canvas.height;
@@ -25,17 +25,17 @@ var L09_Pond;
             let cloud = new L09_Pond.Cloud(Math.random() * 500, Math.random() * 200);
             clouds.push(cloud);
         }
-        // Tails zeichnen
+        // Tails generieren
         for (let i = 0; i < 3; i++) {
             let tail = new L09_Pond.Tail(350 + Math.random() * 50, 330 + Math.random() * 80); // Startposition
             tails.push(tail);
         }
-        // Ducks zeichnen
+        // Ducks generieren
         for (let i = 0; i < 3; i++) {
             let duck = new L09_Pond.Duck(350 + Math.random() * 50, 400 + Math.random() * 50); // Startposition
             ducks.push(duck);
         }
-        //Flamingo zeichnen
+        //Flamingo generieren
         for (let i = 0; i < 4; i++) {
             let randomX = 10 + Math.random() * 250; // Zufällige x-Position zwischen 10 und 50
             let randomY = 300 + Math.random() * 250; // Zufällige y-Position zwischen 300 und 550
@@ -46,25 +46,25 @@ var L09_Pond;
     }
     function animate() {
         drawBackround();
-        for (let i = 0; i < ladybugs.length; i++) {
-            ladybugs[i].move();
-            ladybugs[i].draw();
-        }
         for (let i = 0; i < clouds.length; i++) {
             clouds[i].move();
             clouds[i].draw();
-        }
-        for (let i = 0; i < ducks.length; i++) {
-            ducks[i].move();
-            ducks[i].draw();
         }
         for (let i = 0; i < tails.length; i++) {
             tails[i].move();
             tails[i].draw();
         }
+        for (let i = 0; i < ducks.length; i++) {
+            ducks[i].move();
+            ducks[i].draw();
+        }
         for (let flamingo of flamingos) {
             flamingo.move();
             flamingo.draw();
+        }
+        for (let i = 0; i < ladybugs.length; i++) {
+            ladybugs[i].move();
+            ladybugs[i].draw();
         }
     }
     function drawBackround() {
