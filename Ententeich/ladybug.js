@@ -10,19 +10,19 @@ var L09_Pond;
             this.x = _x;
             this.y = _y;
             this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
-            this.speedY = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in y-Richtung
+            this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }
         move() {
-            console.log("ladybug draw");
-            // Bewegung der Ladybug durch Anpassung der Position basierend auf der Geschwindigkeit
+            //console.log("ladybug draw")
+            // Bewegung durch anpassung der Geschwindigkeit
             this.x += this.speedX;
             this.y += this.speedY;
             // Begrenzung der Bewegung auf das Canvas
             if (this.x < 0 || this.x > L09_Pond.crc2.canvas.width) {
-                this.speedX *= -1; // Richtung umkehren, wenn Rand erreicht wird
+                this.speedX *= -1; // Richtung umkehren
             }
             if (this.y < 0 || this.y > L09_Pond.crc2.canvas.height) {
-                this.speedY *= -1; // Richtung umkehren, wenn Rand erreicht wird
+                this.speedY *= -1; // Richtung umkehren
             }
         }
         draw() {
