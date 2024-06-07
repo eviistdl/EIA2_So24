@@ -20,6 +20,9 @@ var L09_Pond;
             //console.log("duck draw");
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
+            if (this.direction.x === -1) {
+                L09_Pond.crc2.scale(-1, 1); // Horizontal spiegeln
+            }
             // Körper
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.ellipse(0, 0, 25, 12, 0, 0, 2 * Math.PI);

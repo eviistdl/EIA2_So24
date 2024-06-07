@@ -23,7 +23,9 @@ namespace L09_Pond {
             crc2.save();
     
             crc2.translate(this.x, this.y);
-        
+            if (this.direction.x === -1) {
+                crc2.scale(-1, 1); // Horizontal spiegeln
+            }
             // Dreieck zeichnen
             crc2.beginPath();
             crc2.moveTo(0, 0); 

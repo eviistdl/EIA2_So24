@@ -1,14 +1,11 @@
 "use strict";
 var L09_Pond;
 (function (L09_Pond) {
-    class Ladybug {
-        x;
-        y;
+    class Ladybug extends L09_Pond.Movable {
         speedX;
         speedY;
-        constructor(_x, _y) {
-            this.x = _x;
-            this.y = _y;
+        constructor(_x, _y, _direction, _speedY, _speedX) {
+            super(_x, _y, _direction);
             this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
             this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }

@@ -1,12 +1,9 @@
 "use strict";
 var L09_Pond;
 (function (L09_Pond) {
-    class Cloud {
-        x;
-        y;
-        constructor(_x, _y) {
-            this.x = _x;
-            this.y = _y;
+    class Cloud extends L09_Pond.Movable {
+        constructor(_x, _y, _direction) {
+            super(_x, _y, _direction);
         }
         move() {
             //console.log("cloud move");

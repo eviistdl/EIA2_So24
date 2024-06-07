@@ -1,18 +1,15 @@
 namespace L09_Pond {
-    export class Flamingo {
-        x: number;
-        y: number;
-        direction: number;
+    export class Flamingo extends Movable{
         baseY: number;
         angle: number;
 
-        constructor(_x: number, _y: number) {
-            this.x = _x;
+        constructor(_x: number, _y: number, _direction: Vector) {
+            super(_x, _y, _direction);
             this.baseY = _y; // baseline definieren
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI; 
         }
-
+    
         move(): void {
             // angle für bewegung
             this.angle += 0.1;

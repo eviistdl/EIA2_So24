@@ -1,13 +1,10 @@
 namespace L09_Pond {
-    export  class Ladybug {
-        x: number;
-        y: number;
+    export  class Ladybug extends Movable {
         speedX: number;
         speedY: number;
 
-        constructor(_x: number, _y: number) {
-            this.x = _x;
-            this.y = _y;
+        constructor(_x: number, _y: number, _direction: Vector, _speedY:number, _speedX:number) {
+            super(_x, _y, _direction);
             this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
             this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }

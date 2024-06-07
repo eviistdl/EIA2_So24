@@ -20,6 +20,9 @@ var L09_Pond;
             console.log("tail draw");
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
+            if (this.direction.x === -1) {
+                L09_Pond.crc2.scale(-1, 1); // Horizontal spiegeln
+            }
             // Dreieck zeichnen
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(0, 0);

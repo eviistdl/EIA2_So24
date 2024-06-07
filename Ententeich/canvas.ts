@@ -2,11 +2,8 @@ namespace L09_Pond {
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
-    let clouds: Cloud[] = [];
-    let ducks: Duck[] = [];
-    let tails: Tail[] = [];
-    let flamingos: Flamingo[] = [];
-    let ladybugs: Ladybug[] = [];
+    let movable: Movable[] = [];
+
 
     function handleLoad(_event: Event): void {
         // Zugriff auf das Canvas-Element
@@ -15,67 +12,49 @@ namespace L09_Pond {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         
-        // Ladybugs generieren
-        for (let i: number = 0; i < 5; i++) {
-            let randomX: number = Math.random() * canvas.width;
-            let randomY: number = Math.random() * canvas.height;
-            let ladybug: Ladybug = new Ladybug(randomX, randomY);
-            ladybugs.push(ladybug);
-        }
-
-        // Clouds random auf x und y zeichnen
-        for (let i: number = 0; i < 5; i++) {
-            let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200);
-            clouds.push(cloud);
-        }
 
         // Tails generieren
         for (let i: number = 0; i < 3; i++) {
-            let tail: Tail = new Tail(350 + Math.random() * 50, 330 + Math.random() * 80, new Vector(1,0)); // Startposition
-            tails.push(tail);
+            let tail: Tail = new Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new Vector(1,0)); // Startposition
+            movable.push(tail);
         }
 
         // Ducks generieren
         for (let i: number = 0; i < 3; i++) {
-            let duck: Duck = new Duck(350 + Math.random() * 50, 400 + Math.random() * 50, new Vector(1,0)); // Startposition
-            ducks.push(duck);
+            let duck: Duck = new Duck(270 + Math.random() * 30, 400 + Math.random() * 50, new Vector(1,0)); // Startposition
+            movable.push(duck);
         }
 
         //Flamingo generieren
         for (let i: number = 0; i < 4; i++) {
             let randomX: number = 10 + Math.random() * 250; // Zufällige x-Position zwischen 10 und 50
             let randomY: number = 300 + Math.random() * 250; // Zufällige y-Position zwischen 300 und 550
-            let flamingo: Flamingo = new Flamingo(randomX, randomY);
-            flamingos.push(flamingo);
+            let flamingo: Flamingo = new Flamingo(randomX, randomY, new Vector(1,0));
+            movable.push(flamingo);
+        }
+        // Clouds random auf x und y zeichnen
+        for (let i: number = 0; i < 5; i++) {
+            let cloud: Cloud = new Cloud(Math.random() * 500, Math.random() * 200, new Vector(-1,0));
+            movable.push(cloud);
+        }
+        
+         // Ladybugs generieren
+         for (let i: number = 0; i < 5; i++) {
+            let randomX: number = Math.random() * canvas.width;
+            let randomY: number = Math.random() * canvas.height;
+            let ladybug: Ladybug = new Ladybug(randomX, randomY, new Vector(1,0), Math.random() * 10 - 1, Math.random() * 8 - 1);
+            movable.push(ladybug);
         }
 
-        
         setInterval(animate, 20);
     }
 
     function animate(): void {
         drawBackround();
-        
-        for (let i: number = 0; i < clouds.length; i++) {
-            clouds[i].move();
-            clouds[i].draw();
-        }
-        
-        for (let i: number = 0; i < tails.length; i++) {
-            tails[i].move();
-            tails[i].draw();
-        }
-        for (let i: number = 0; i < ducks.length; i++) {
-            ducks[i].move();
-            ducks[i].draw();
-        }
-        for (let flamingo of flamingos) {
-            flamingo.move();
-            flamingo.draw();
-        }
-        for (let i: number = 0; i< ladybugs.length; i++) {
-            ladybugs[i].move();
-            ladybugs[i].draw();
+
+        for (let movables of movable){
+            movables.draw();
+            movables.move();
         }
     }
 

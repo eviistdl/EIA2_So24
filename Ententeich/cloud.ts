@@ -1,11 +1,8 @@
 namespace L09_Pond {
-    export class Cloud {
-        x: number;
-        y: number;
+    export class Cloud extends Movable{
 
-        constructor(_x: number, _y: number) {
-            this.x = _x;
-            this.y = _y;
+        constructor(_x: number, _y: number, _direction: Vector) {
+            super(_x, _y, _direction);
         }
 
         move(): void {

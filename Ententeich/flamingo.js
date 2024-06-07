@@ -1,14 +1,11 @@
 "use strict";
 var L09_Pond;
 (function (L09_Pond) {
-    class Flamingo {
-        x;
-        y;
-        direction;
+    class Flamingo extends L09_Pond.Movable {
         baseY;
         angle;
-        constructor(_x, _y) {
-            this.x = _x;
+        constructor(_x, _y, _direction) {
+            super(_x, _y, _direction);
             this.baseY = _y; // baseline definieren
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI;
