@@ -1,25 +1,21 @@
 namespace L09_Pond {
-    export class Duck {
-        x: number;
-        y: number;
-        direction: number;
+    export class Duck extends Movable{
 
-        constructor(_x: number, _y: number) {
-            this.x = _x;
-            this.y = _y;
-            this.direction = Math.random() < 0.5 ? -1 : 1; // Zufällige Richtung
+        constructor(_x: number, _y: number, _direction: Vector) {
+           super(_x, _y, _direction);
+
         }
 
         move(): void {
             //console.log("duck move");
-            this.x += 1 * this.direction;
+            this.x += 1 * this.direction.x;
 
             // Wenn die Ente bei 500 auf x, wechsle die Richtung
             if (this.x > 500) {
-                this.direction = -1;
+                this.direction.x = -1;
             }
             if (this.x < 270) {
-                this.direction = 1;
+                this.direction.x = 1;
             }
         }
 

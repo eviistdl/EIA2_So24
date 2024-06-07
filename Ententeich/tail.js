@@ -1,24 +1,19 @@
 "use strict";
 var L09_Pond;
 (function (L09_Pond) {
-    class Tail {
-        x;
-        y;
-        direction;
-        constructor(_x, _y) {
-            this.x = _x;
-            this.y = _y;
-            this.direction = 1;
+    class Tail extends L09_Pond.Movable {
+        constructor(_x, _y, _direction) {
+            super(_x, _y, _direction);
         }
         move() {
             console.log("tail move");
-            this.x += 1 * this.direction; //Richtung bestimmen
+            this.x += 1 * this.direction.x; //Richtung bestimmen
             // Definition wann Richtungswechsel
             if (this.x > 430) {
-                this.direction = -1;
+                this.direction.x = -1;
             }
             if (this.x < 350) {
-                this.direction = 1;
+                this.direction.x = 1;
             }
         }
         draw() {

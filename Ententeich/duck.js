@@ -1,24 +1,19 @@
 "use strict";
 var L09_Pond;
 (function (L09_Pond) {
-    class Duck {
-        x;
-        y;
-        direction;
-        constructor(_x, _y) {
-            this.x = _x;
-            this.y = _y;
-            this.direction = Math.random() < 0.5 ? -1 : 1; // Zufällige Richtung
+    class Duck extends L09_Pond.Movable {
+        constructor(_x, _y, _direction) {
+            super(_x, _y, _direction);
         }
         move() {
             //console.log("duck move");
-            this.x += 1 * this.direction;
+            this.x += 1 * this.direction.x;
             // Wenn die Ente bei 500 auf x, wechsle die Richtung
             if (this.x > 500) {
-                this.direction = -1;
+                this.direction.x = -1;
             }
             if (this.x < 270) {
-                this.direction = 1;
+                this.direction.x = 1;
             }
         }
         draw() {

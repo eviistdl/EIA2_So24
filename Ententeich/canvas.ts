@@ -31,13 +31,13 @@ namespace L09_Pond {
 
         // Tails generieren
         for (let i: number = 0; i < 3; i++) {
-            let tail: Tail = new Tail(350 + Math.random() * 50, 330 + Math.random() * 80); // Startposition
+            let tail: Tail = new Tail(350 + Math.random() * 50, 330 + Math.random() * 80, new Vector(1,0)); // Startposition
             tails.push(tail);
         }
 
         // Ducks generieren
         for (let i: number = 0; i < 3; i++) {
-            let duck: Duck = new Duck(350 + Math.random() * 50, 400 + Math.random() * 50); // Startposition
+            let duck: Duck = new Duck(350 + Math.random() * 50, 400 + Math.random() * 50, new Vector(1,0)); // Startposition
             ducks.push(duck);
         }
 

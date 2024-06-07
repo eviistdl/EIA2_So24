@@ -1,25 +1,20 @@
 namespace L09_Pond {
-    export class Tail {
-        x: number;
-        y: number;
-        direction: number;
+    export class Tail extends Movable{
 
-        constructor(_x: number, _y: number) {
-            this.x = _x;
-            this.y = _y;
-            this.direction = 1; 
+        constructor(_x: number, _y: number, _direction: Vector) {
+            super(_x, _y, _direction);
         }
 
         move(): void {
             console.log("tail move");
-            this.x += 1 * this.direction; //Richtung bestimmen
+            this.x += 1 * this.direction.x; //Richtung bestimmen
 
             // Definition wann Richtungswechsel
             if (this.x > 430) {
-                this.direction = -1;
+                this.direction.x = -1;
             }
             if (this.x < 350) {
-                this.direction = 1;
+                this.direction.x = 1;
             }
         }
 
