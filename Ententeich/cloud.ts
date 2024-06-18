@@ -1,11 +1,11 @@
 namespace L09_Pond {
     export class Cloud extends Movable{
 
-        constructor(_x: number, _y: number, _direction: Vector) {
+        public constructor(_x: number, _y: number, _direction: Vector) {
             super(_x, _y, _direction);
         }
 
-        move(): void {
+        public move(): void {
             //console.log("cloud move");
             this.x += 1;
 
@@ -15,7 +15,7 @@ namespace L09_Pond {
             }
         }
 
-        draw(): void {
+        public draw(): void {
             crc2.save();
             crc2.translate(this.x, this.y);
 

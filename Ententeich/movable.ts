@@ -1,21 +1,21 @@
 namespace L09_Pond {
     
-    export class Movable {
+    export abstract class Movable {
         x: number;
         y: number;
         direction: Vector;
 
-        constructor(_x: number, _y: number, _direction: Vector){
+        public constructor(_x: number, _y: number, _direction: Vector){
             this.x = _x;
             this.y = _y;
-            this.direction = new Vector(_x, _y);
+            this.direction = _direction;
         }
 
-        draw(): void{
+        public draw(): void{
             console.log ("movables draw")
         }
 
-        move(): void {
+        public move(): void {
             console.log ("movables move")
         }
     }

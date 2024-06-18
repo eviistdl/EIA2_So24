@@ -6,7 +6,7 @@ var L09_Pond;
             super(_x, _y, _direction);
         }
         move() {
-            console.log("tail move");
+            //console.log("tail move");
             this.x += 1 * this.direction.x; //Richtung bestimmen
             // Definition wann Richtungswechsel
             if (this.x > 430) {
@@ -17,7 +17,7 @@ var L09_Pond;
             }
         }
         draw() {
-            console.log("tail draw");
+            //console.log("tail draw")
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
             if (this.direction.x === -1) {

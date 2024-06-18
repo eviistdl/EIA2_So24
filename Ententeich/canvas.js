@@ -9,14 +9,15 @@ var L09_Pond;
         if (!canvas)
             return;
         L09_Pond.crc2 = canvas.getContext("2d");
+        canvas.addEventListener("click", handleClick);
         // Tails generieren
         for (let i = 0; i < 3; i++) {
             let tail = new L09_Pond.Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new L09_Pond.Vector(1, 0)); // Startposition
             movable.push(tail);
         }
         // Ducks generieren
-        for (let i = 0; i < 3; i++) {
-            let duck = new L09_Pond.Duck(270 + Math.random() * 30, 400 + Math.random() * 50, new L09_Pond.Vector(1, 0)); // Startposition
+        for (let i = 0; i < 2; i++) {
+            let duck = new L09_Pond.Duck(320 + Math.random() * 0, 400 + Math.random() * 70, new L09_Pond.Vector(1, 0)); // Startposition
             movable.push(duck);
         }
         //Flamingo generieren
@@ -39,6 +40,22 @@ var L09_Pond;
             movable.push(ladybug);
         }
         setInterval(animate, 20);
+    }
+    function handleClick(event) {
+        let canvasRect = event.target.getBoundingClientRect();
+        let clickX = event.clientX - canvasRect.left;
+        let clickY = event.clientY - canvasRect.top;
+        console.log(`Clicked at position: (${clickX}, ${clickY})`);
+        let duckClick = false;
+        for (let movables of movable) {
+            if (movables instanceof L09_Pond.Duck) {
+                let duck = movables;
+                if (duck.checkHit(clickX, clickY)) {
+                    duckClick = true;
+                    break; // Nur eine Ente kann gleichzeitig getroffen werden
+                }
+            }
+        }
     }
     function animate() {
         drawBackround();

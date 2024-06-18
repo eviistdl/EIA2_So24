@@ -3,14 +3,14 @@ namespace L09_Pond {
         baseY: number;
         angle: number;
 
-        constructor(_x: number, _y: number, _direction: Vector) {
+        public constructor(_x: number, _y: number, _direction: Vector) {
             super(_x, _y, _direction);
             this.baseY = _y; // baseline definieren
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI; 
         }
     
-        move(): void {
+        public move(): void {
             // angle für bewegung
             this.angle += 0.1;
 
@@ -18,7 +18,7 @@ namespace L09_Pond {
             this.y = this.baseY + Math.sin(this.angle) * 15; 
         }
 
-        draw(): void {
+        public draw(): void {
             crc2.save();
             crc2.translate(this.x, this.y);
 

@@ -3,13 +3,13 @@ namespace L09_Pond {
         speedX: number;
         speedY: number;
 
-        constructor(_x: number, _y: number, _direction: Vector, _speedY:number, _speedX:number) {
+        public constructor(_x: number, _y: number, _direction: Vector, _speedY:number, _speedX:number) {
             super(_x, _y, _direction);
             this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
             this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }
 
-        move(): void {
+        public move(): void {
             //console.log("ladybug draw")
             // Bewegung durch anpassung der Geschwindigkeit
             this.x += this.speedX;
@@ -24,7 +24,7 @@ namespace L09_Pond {
             }
         }
 
-        draw(): void {
+        public draw(): void {
             crc2.save();
             crc2.translate(this.x, this.y);
 

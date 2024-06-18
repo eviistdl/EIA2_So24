@@ -1,12 +1,12 @@
 namespace L09_Pond {
     export class Tail extends Movable{
 
-        constructor(_x: number, _y: number, _direction: Vector) {
+        public constructor(_x: number, _y: number, _direction: Vector) {
             super(_x, _y, _direction);
         }
 
-        move(): void {
-            console.log("tail move");
+        public move(): void {
+            //console.log("tail move");
             this.x += 1 * this.direction.x; //Richtung bestimmen
 
             // Definition wann Richtungswechsel
@@ -18,8 +18,8 @@ namespace L09_Pond {
             }
         }
 
-        draw(): void {
-            console.log("tail draw")
+        public draw(): void {
+            //console.log("tail draw")
             crc2.save();
     
             crc2.translate(this.x, this.y);

@@ -8,7 +8,7 @@ var L09_Pond;
         constructor(_x, _y, _direction) {
             this.x = _x;
             this.y = _y;
-            this.direction = new L09_Pond.Vector(_x, _y);
+            this.direction = _direction;
         }
         draw() {
             console.log("movables draw");

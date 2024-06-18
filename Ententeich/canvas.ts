@@ -2,8 +2,8 @@ namespace L09_Pond {
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
-    let movable: Movable[] = [];
 
+    let movable: Movable[] = [];
 
     function handleLoad(_event: Event): void {
         // Zugriff auf das Canvas-Element
@@ -11,8 +11,9 @@ namespace L09_Pond {
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-        
 
+        canvas.addEventListener("click", handleClick);
+        
         // Tails generieren
         for (let i: number = 0; i < 3; i++) {
             let tail: Tail = new Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new Vector(1,0)); // Startposition
@@ -20,11 +21,12 @@ namespace L09_Pond {
         }
 
         // Ducks generieren
-        for (let i: number = 0; i < 3; i++) {
-            let duck: Duck = new Duck(270 + Math.random() * 30, 400 + Math.random() * 50, new Vector(1,0)); // Startposition
+        for (let i: number = 0; i < 2; i++) {
+           
+
+            let duck: Duck = new Duck(320 + Math.random() * 0, 400 + Math.random() * 70, new Vector(1, 0)); // Startposition
             movable.push(duck);
         }
-
         //Flamingo generieren
         for (let i: number = 0; i < 4; i++) {
             let randomX: number = 10 + Math.random() * 250; // Zufällige x-Position zwischen 10 und 50
@@ -47,6 +49,27 @@ namespace L09_Pond {
         }
 
         setInterval(animate, 20);
+    }
+
+    function handleClick(event: MouseEvent): void {
+        let canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect();
+        let clickX = event.clientX - canvasRect.left;
+        let clickY = event.clientY - canvasRect.top;
+
+        console.log(`Clicked at position: (${clickX}, ${clickY})`);
+
+        let duckClick = false;
+
+
+        for (let movables of movable) {
+            if (movables instanceof Duck) {
+                let duck = movables as Duck
+                if (duck.checkHit(clickX, clickY)) {
+                duckClick = true;
+                break; // Nur eine Ente kann gleichzeitig getroffen werden
+                }
+            }
+        }
     }
 
     function animate(): void {
@@ -202,3 +225,4 @@ namespace L09_Pond {
         crc2.fill();
     }
 }
+
