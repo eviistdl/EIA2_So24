@@ -3,6 +3,7 @@ var L09_Pond;
 (function (L09_Pond) {
     window.addEventListener("load", handleLoad);
     let movable = [];
+    let crumbs = [];
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
@@ -46,22 +47,25 @@ var L09_Pond;
         let clickX = event.clientX - canvasRect.left;
         let clickY = event.clientY - canvasRect.top;
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
-        let duckClick = false;
+        let crumb = new L09_Pond.Crumbs(clickX, clickY);
+        crumbs.push(crumb);
         for (let movables of movable) {
             if (movables instanceof L09_Pond.Duck) {
                 let duck = movables;
                 if (duck.checkHit(clickX, clickY)) {
-                    duckClick = true;
-                    break; // Nur eine Ente kann gleichzeitig getroffen werden
                 }
             }
         }
     }
+    L09_Pond.handleClick = handleClick;
     function animate() {
         drawBackround();
         for (let movables of movable) {
             movables.draw();
             movables.move();
+        }
+        for (let crumb of crumbs) {
+            crumb.draw();
         }
     }
     function drawBackround() {

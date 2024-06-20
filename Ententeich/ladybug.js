@@ -32,12 +32,14 @@ var L09_Pond;
             L09_Pond.crc2.strokeStyle = "black";
             L09_Pond.crc2.lineWidth = 2;
             L09_Pond.crc2.stroke();
+            L09_Pond.crc2.closePath();
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(-6, -10);
             L09_Pond.crc2.lineTo(-17, -25);
             L09_Pond.crc2.strokeStyle = "black";
             L09_Pond.crc2.lineWidth = 2;
             L09_Pond.crc2.stroke();
+            L09_Pond.crc2.closePath();
             // Körper
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.ellipse(2, -2, 12, 12, -2, 0, 2 * Math.PI, false);
@@ -82,6 +84,7 @@ var L09_Pond;
             L09_Pond.crc2.strokeStyle = "black";
             L09_Pond.crc2.lineWidth = 2;
             L09_Pond.crc2.stroke();
+            L09_Pond.crc2.closePath();
             L09_Pond.crc2.restore();
         }
     }

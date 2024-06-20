@@ -35,6 +35,7 @@ namespace L09_Pond {
             crc2.strokeStyle = "black";
             crc2.lineWidth = 2;
             crc2.stroke();
+            crc2.closePath();
 
             crc2.beginPath();
             crc2.moveTo(-6, -10);
@@ -42,6 +43,7 @@ namespace L09_Pond {
             crc2.strokeStyle = "black";
             crc2.lineWidth = 2;
             crc2.stroke();
+            crc2.closePath();
 
             // Körper
             crc2.beginPath();
@@ -92,6 +94,7 @@ namespace L09_Pond {
             crc2.strokeStyle = "black";
             crc2.lineWidth = 2;
             crc2.stroke();
+            crc2.closePath();
 
             crc2.restore();
         }

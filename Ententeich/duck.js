@@ -16,13 +16,14 @@ var L09_Pond;
                 case "duckHeart":
                     if (this.isClicked) {
                         this.framesCounter++;
-                        if (this.framesCounter >= 7) {
+                        // console.log(this.framesCounter);
+                        if (this.framesCounter >= 30) {
                             this.framesCounter = 0;
                             this.isClicked = false;
                             this.state = "duckNormal";
                         }
                     }
-                    break;
+                //break;
                 default:
                     // Wenn die Ente bei 500 auf x, wechsle die Richtung
                     if (this.x > 500) {
@@ -33,32 +34,25 @@ var L09_Pond;
                     }
             }
         }
-        // public boxClicked(x: number, y: number): boolean {
-        //     const withinX = x >= this.x - 25 && x <= this.x + 25;
-        //     const withinY = y >= this.y - 10 && y <= this.y + 10;
-        //     return withinX && withinY;
-        // }
         checkHit(_x, _y) {
             console.log("Hit");
-            const minX = this.x - 50;
-            const maxX = this.x + 50;
-            const minY = this.y - 50;
-            const maxY = this.y + 50; // Grenzen um die Ente festlegen
-            // Überprüfen, ob das Klickereignis innerhalb des Rechtecks liegt
+            const minX = this.x - 20;
+            const maxX = this.x + 20;
+            const minY = this.y - 20;
+            const maxY = this.y + 20; // Grenzen um die Ente festlegen
             if (_x > minX && _x < maxX && _y > minY && _y < maxY) {
-                this.click(); // Aufruf der click Methode
-                return true; // true zurückgeben, wenn Ente getroffen wird
+                this.click();
+                return true;
             }
             else {
-                return false; // false zurückgeben, wenn Ente nicht getroffen wird
+                return false;
             }
         }
         click() {
             // Zustand zu duckHeart wechseln und Frame-Zähler setzen
             console.log("click");
-            //if (!this.is)
+            this.isClicked = true;
             this.state = "duckHeart";
-            //this.framesRemaining = 40;
         }
         draw() {
             switch (this.state) {
@@ -137,7 +131,7 @@ var L09_Pond;
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.arc(20, -20, 10, 0, 2 * Math.PI); // Kopf
             L09_Pond.crc2.closePath();
-            L09_Pond.crc2.fillStyle = "yellow";
+            L09_Pond.crc2.fillStyle = "red";
             L09_Pond.crc2.fill();
             // Schnabel
             L09_Pond.crc2.beginPath();
@@ -168,20 +162,17 @@ var L09_Pond;
             // Herz zeichnen
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y - 30); // Position über der Ente
-            L09_Pond.crc2.scale(0.5, 0.5); // Herz verkleinern
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(0, 0);
-            L09_Pond.crc2.bezierCurveTo(0, -3, -5, -15, -15, -15);
-            L09_Pond.crc2.bezierCurveTo(-25, -15, -25, 0, -25, 0);
-            L09_Pond.crc2.bezierCurveTo(-25, 10, -15, 25, 0, 35);
-            L09_Pond.crc2.bezierCurveTo(15, 25, 25, 10, 25, 0);
-            L09_Pond.crc2.bezierCurveTo(25, 0, 25, -15, 15, -15);
-            L09_Pond.crc2.bezierCurveTo(5, -15, 0, -3, 0, 0);
-            L09_Pond.crc2.closePath();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.moveTo(0, -3.75); // Startpunkt oben mittig (15 / 4 = 3.75)
+            L09_Pond.crc2.bezierCurveTo(-3.75, -7.5, -7.5, -7.5, -7.5, 0); // (-15 / 4 = -3.75), (-15 / 2 = -7.5)
+            L09_Pond.crc2.bezierCurveTo(-7.5, 7.5, 0, 7.5, 0, 15); // 15 / 2 = 7.5
+            L09_Pond.crc2.bezierCurveTo(0, 7.5, 7.5, 7.5, 7.5, 0); // 15 / 2 = 7.5
+            L09_Pond.crc2.bezierCurveTo(7.5, -7.5, 3.75, -7.5, 0, -3.75); // 15 / 4 = 3.75
             L09_Pond.crc2.fillStyle = "red";
             L09_Pond.crc2.fill();
-            L09_Pond.crc2.strokeStyle = "red";
-            L09_Pond.crc2.stroke();
+            L09_Pond.crc2.restore();
             L09_Pond.crc2.restore();
         }
     }
