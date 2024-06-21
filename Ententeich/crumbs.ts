@@ -8,6 +8,21 @@ namespace L09_Pond {
             this.y = _y;
         }
 
+        public checkLocation(_clickX: number, _clickY: number): boolean {
+            // Überprüfen, ob der Klick im Bereich der Krümel liegt
+            const minX = 10;
+            const maxX = 270;
+            const minY = 300;
+            const maxY = 500;
+
+            if (_clickX > minX && _clickX < maxX && _clickY > minY && _clickY < maxY) {
+                return (_clickX >= 10 && _clickX <= 270 && _clickY >= 300 && _clickY <= 500);
+                // Klick befindet sich im Bereich
+            } else {
+                return false; // Klick befindet sich nicht im Bereich
+            }
+        }
+
         draw(): void {
             crc2.save();
 

@@ -13,12 +13,17 @@ var L09_Pond;
         canvas.addEventListener("click", handleClick);
         // Tails generieren
         for (let i = 0; i < 3; i++) {
-            let tail = new L09_Pond.Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new L09_Pond.Vector(1, 0)); // Startposition
+            let randomX = 270 + Math.random() * 250; // Zufällige x-Position
+            let randomY = 350 + Math.random() * 100; // Zufällige y-Position 
+            let tail = new L09_Pond.Tail(randomX, randomY, new L09_Pond.Vector(1, 0));
+            //let tail: Tail = new Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new Vector(1, 0)); // Startposition
             movable.push(tail);
         }
         // Ducks generieren
-        for (let i = 0; i < 2; i++) {
-            let duck = new L09_Pond.Duck(320 + Math.random() * 0, 400 + Math.random() * 70, new L09_Pond.Vector(1, 0)); // Startposition
+        for (let i = 0; i < 3; i++) {
+            let randomX = 270 + Math.random() * 250; // Zufällige x-Position
+            let randomY = 350 + Math.random() * 100; // Zufällige y-Position 
+            let duck = new L09_Pond.Duck(randomX, randomY, new L09_Pond.Vector(1, 0));
             movable.push(duck);
         }
         //Flamingo generieren
@@ -47,8 +52,11 @@ var L09_Pond;
         let clickX = event.clientX - canvasRect.left;
         let clickY = event.clientY - canvasRect.top;
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
-        let crumb = new L09_Pond.Crumbs(clickX, clickY);
-        crumbs.push(crumb);
+        if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 500) {
+            let crumb = new L09_Pond.Crumbs(clickX, clickY);
+            crumbs.push(crumb);
+            console.log("crumb push");
+        }
         for (let movables of movable) {
             if (movables instanceof L09_Pond.Duck) {
                 let duck = movables;

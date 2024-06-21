@@ -8,6 +8,20 @@ var L09_Pond;
             this.x = _x;
             this.y = _y;
         }
+        checkLocation(_clickX, _clickY) {
+            // Überprüfen, ob der Klick im Bereich der Krümel liegt
+            const minX = 10;
+            const maxX = 270;
+            const minY = 300;
+            const maxY = 500;
+            if (_clickX > minX && _clickX < maxX && _clickY > minY && _clickY < maxY) {
+                return (_clickX >= 10 && _clickX <= 270 && _clickY >= 300 && _clickY <= 500);
+                // Klick befindet sich im Bereich
+            }
+            else {
+                return false; // Klick befindet sich nicht im Bereich
+            }
+        }
         draw() {
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
