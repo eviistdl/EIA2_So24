@@ -7,20 +7,25 @@ var L09_Pond;
         angle;
         targetX;
         targetY;
-        positionBeforeX;
-        positionBeforeY;
+        framesCounter = 0;
+        previousPosition;
+        targetPosition;
+        // private positionBeforeX: number;
+        // private positionBeforeY: number;
         constructor(_x, _y, _direction) {
             super(_x, _y, _direction);
             this.baseY = _y; // baseline definieren
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI;
-            this.positionBeforeX = _x;
-            this.positionBeforeY = _y;
+            this.previousPosition = null;
+            this.targetPosition = null;
+            // this.positionBeforeX = _x;
+            // this.positionBeforeY = _y;
         }
         move() {
             // Speichern der aktuellen Position
-            this.positionBeforeX = this.x;
-            this.positionBeforeY = this.y;
+            // this.positionBeforeX = this.x;
+            // this.positionBeforeY = this.y;
             if (this.targetX !== undefined && this.targetY !== undefined) {
                 let dx = this.targetX - this.x;
                 let dy = this.targetY - this.y;
@@ -42,17 +47,43 @@ var L09_Pond;
                 // Höhe auf die base addieren, Amplitude = 15
                 this.y = this.baseY + Math.sin(this.angle) * 15;
             }
+            if (this.state === "flamingoEat") {
+                this.framesCounter++;
+                if (this.framesCounter >= 70) {
+                    this.framesCounter = 0;
+                    this.state = "flamingoNormal";
+                }
+            }
         }
         moveToCrumb(crumbX, crumbY) {
             this.targetX = crumbX;
             this.targetY = crumbY;
         }
+        update() {
+            if (this.state === "flamingoEat" && this.targetPosition) {
+                // Flamingo bewegen, solange er sich in "flamingoEat" Zustand befindet
+                this.x = this.targetPosition.x;
+                this.y = this.targetPosition.y;
+                this.framesCounter++; // Frames-Zähler erhöhen
+                if (this.framesCounter >= 70) { // Wenn 70 Frames vergangen sind
+                    this.state = "flamingoNormal"; // Zustand zurück auf normal ändern
+                    this.framesCounter = 0; // Frames-Zähler zurücksetzen für den nächsten Einsatz
+                    if (this.previousPosition) {
+                        // Zur vorherigen Position zurückkehren
+                        this.x = this.previousPosition.x;
+                        this.y = this.previousPosition.y;
+                    }
+                    this.previousPosition = null; // Vorherige Position leeren
+                    this.targetPosition = null; // Zielposition leeren
+                }
+            }
+        }
         setTarget(_x, _y) {
-            this.positionBeforeX = this.x; // Speichern der aktuellen Position
-            this.positionBeforeY = this.y;
-            this.targetX = _x; // Geklickte position setzen
-            this.targetY = _y;
-            this.state = "flamingoEat";
+            // this.positionBeforeX = this.x; // Speichern der aktuellen Position
+            // this.positionBeforeY = this.y;
+            this.targetX = _x - 20; // Geklickte position setzen
+            this.targetY = _y - 50;
+            this.state = "flamingoNormal";
         }
         draw() {
             switch (this.state) {
@@ -122,32 +153,32 @@ var L09_Pond;
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.ellipse(0, 0, 25, 12, 0, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
-            L09_Pond.crc2.fillStyle = "red";
+            L09_Pond.crc2.fillStyle = "#EE5A8D";
             L09_Pond.crc2.fill();
             // Hals
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(20, 0);
-            L09_Pond.crc2.lineTo(18, -30);
-            L09_Pond.crc2.strokeStyle = "red";
+            L09_Pond.crc2.lineTo(18, 30);
+            L09_Pond.crc2.strokeStyle = "#EE5A8D";
             L09_Pond.crc2.lineWidth = 4;
             L09_Pond.crc2.stroke();
             // Kopf 
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.arc(20, -40, 10, 0, 2 * Math.PI); // Kopf
+            L09_Pond.crc2.arc(20, 40, 10, 0, 2 * Math.PI); // Kopf
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "#EE5A8D";
             L09_Pond.crc2.fill();
             // Schnabel
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.moveTo(28, -45);
-            L09_Pond.crc2.lineTo(30, -36);
-            L09_Pond.crc2.lineTo(40, -35);
+            L09_Pond.crc2.moveTo(28, 45);
+            L09_Pond.crc2.lineTo(40, 36);
+            L09_Pond.crc2.lineTo(30, 35);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "#F99948";
             L09_Pond.crc2.fill();
             // Auge
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.arc(24, -40, 2, 0, 2 * Math.PI);
+            L09_Pond.crc2.arc(24, 40, 2, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "black";
             L09_Pond.crc2.fill();

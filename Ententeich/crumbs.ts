@@ -25,6 +25,18 @@ namespace L09_Pond {
             }
         }
 
+        // public deleteCrumb(): void {
+        //     // Find the index of this crumb in the global crumbs array
+        //     let index = crumbs.indexOf(this);
+        //     if (index !== -1) {
+        //         crumbs.splice(index, 1); // Remove crumb from array
+        //     }
+        // }
+
+        public getPosition(): { x: number, y: number } {
+            return { x: this.x, y: this.y };
+        }
+
         draw(): void {
             crc2.save();
 

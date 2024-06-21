@@ -5,7 +5,6 @@ namespace L09_Pond {
 
     let movable: Movable[] = [];
     let crumbs: Crumbs[] = [];
-    let crumbSpawned: boolean = false;
 
     function handleLoad(_event: Event): void {
         // Zugriff auf das Canvas-Element
@@ -66,7 +65,6 @@ namespace L09_Pond {
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
 
         if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 560) { //Wenn klick in bestimmtem Bereich
-            //let crumbSpawned: boolean = true;
             let crumb: Crumbs = new Crumbs(clickX, clickY); //Crumb bei Click spawnen
             
             crumbs.push(crumb); //crumb zeichnen
@@ -77,8 +75,8 @@ namespace L09_Pond {
             for (let movables of movable) {
                 if (movables instanceof Flamingo) {
                     let flamingo = movables as Flamingo;
-                    let distance = Math.sqrt((flamingo.x - clickX) ** 2 + (flamingo.y - clickY) ** 2);
-        
+                    let distance = Math.sqrt((flamingo.x - clickX) ** 4 + (flamingo.y - clickY) ** 4);
+            
                     // Zustand des Flamingos überprüfen
                     if (distance < closestDistance && flamingo.state !== "flamingoEat") {
                         closestDistance = distance;
@@ -117,6 +115,9 @@ namespace L09_Pond {
         for (let movables of movable) {
             movables.draw();
             movables.move();
+            if (movable instanceof Flamingo) {
+                movable.update(); // Aufruf der update-Methode für Flamingo
+            }
         }
 
         for (let crumb of crumbs) {
