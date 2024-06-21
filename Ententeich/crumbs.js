@@ -4,6 +4,8 @@ var L09_Pond;
     class Crumbs {
         x;
         y;
+        crumbX;
+        crumbY;
         constructor(_x, _y) {
             this.x = _x;
             this.y = _y;

@@ -6,8 +6,8 @@ var L09_Pond;
         speedY;
         constructor(_x, _y, _direction, _speedY, _speedX) {
             super(_x, _y, _direction);
-            this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
-            this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
+            this.speedX = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in x-Richtung
+            this.speedY = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }
         move() {
             //console.log("ladybug draw")

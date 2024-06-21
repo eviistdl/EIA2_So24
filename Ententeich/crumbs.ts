@@ -2,6 +2,8 @@ namespace L09_Pond {
     export class Crumbs {
         x: number;
         y: number;
+        crumbX: number
+        crumbY: number;
 
         public constructor(_x: number, _y: number) {
             this.x = _x;

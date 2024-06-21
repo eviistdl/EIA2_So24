@@ -5,6 +5,7 @@ namespace L09_Pond {
 
     let movable: Movable[] = [];
     let crumbs: Crumbs[] = [];
+    let crumbSpawned: boolean = false;
 
     function handleLoad(_event: Event): void {
         // Zugriff auf das Canvas-Element
@@ -57,7 +58,6 @@ namespace L09_Pond {
     }
 
      
-    
     export function handleClick(event: MouseEvent): void {
         let canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect();
         let clickX = event.clientX - canvasRect.left;
@@ -65,12 +65,40 @@ namespace L09_Pond {
 
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
 
-        if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 500) {
-            let crumb: Crumbs = new Crumbs(clickX, clickY);
-            crumbs.push(crumb);
-            console.log("crumb push");
+        if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 560) { //Wenn klick in bestimmtem Bereich
+            //let crumbSpawned: boolean = true;
+            let crumb: Crumbs = new Crumbs(clickX, clickY); //Crumb bei Click spawnen
+            
+            crumbs.push(crumb); //crumb zeichnen
+
+            let closestFlamingo: Flamingo | null = null; //Flamingo speichern
+            let closestDistance: number = Infinity; //kürzeste Distanz speichern
+
+            for (let movables of movable) {
+                if (movables instanceof Flamingo) {
+                    let flamingo = movables as Flamingo;
+                    let distance = Math.sqrt((flamingo.x - clickX) ** 2 + (flamingo.y - clickY) ** 2);
+        
+                    // Zustand des Flamingos überprüfen
+                    if (distance < closestDistance && flamingo.state !== "flamingoEat") {
+                        closestDistance = distance;
+                        closestFlamingo = flamingo;
+                    }
+                }
+            }
+        
+            if (closestFlamingo) {
+                closestFlamingo.setTarget(clickX, clickY);
+            }
+            // for (let movables of movable) {
+            //     if (movables instanceof Flamingo) {
+            //         let flamingo = movables as Flamingo;
+            //         flamingo.moveToCrumb(clickX, clickY); //Flamingo bewegt sich zu Crumb
+            //         console.log("crumb push");
+            //         break; // Nur den ersten Flamingo behandeln, der gefunden wurde
+            //     }
+            // }
         }
-    
 
         for (let movables of movable) {
             if (movables instanceof Duck) {
@@ -81,6 +109,7 @@ namespace L09_Pond {
             }
         }
     }
+
 
     function animate(): void {
         drawBackround();

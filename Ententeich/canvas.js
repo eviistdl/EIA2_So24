@@ -4,6 +4,7 @@ var L09_Pond;
     window.addEventListener("load", handleLoad);
     let movable = [];
     let crumbs = [];
+    let crumbSpawned = false;
     function handleLoad(_event) {
         // Zugriff auf das Canvas-Element
         let canvas = document.querySelector("canvas");
@@ -52,10 +53,34 @@ var L09_Pond;
         let clickX = event.clientX - canvasRect.left;
         let clickY = event.clientY - canvasRect.top;
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
-        if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 500) {
-            let crumb = new L09_Pond.Crumbs(clickX, clickY);
-            crumbs.push(crumb);
-            console.log("crumb push");
+        if (clickX >= 10 && clickX <= 270 && clickY >= 300 && clickY <= 560) { //Wenn klick in bestimmtem Bereich
+            //let crumbSpawned: boolean = true;
+            let crumb = new L09_Pond.Crumbs(clickX, clickY); //Crumb bei Click spawnen
+            crumbs.push(crumb); //crumb zeichnen
+            let closestFlamingo = null; //Flamingo speichern
+            let closestDistance = Infinity; //kürzeste Distanz speichern
+            for (let movables of movable) {
+                if (movables instanceof L09_Pond.Flamingo) {
+                    let flamingo = movables;
+                    let distance = Math.sqrt((flamingo.x - clickX) ** 2 + (flamingo.y - clickY) ** 2);
+                    // Zustand des Flamingos überprüfen
+                    if (distance < closestDistance && flamingo.state !== "flamingoEat") {
+                        closestDistance = distance;
+                        closestFlamingo = flamingo;
+                    }
+                }
+            }
+            if (closestFlamingo) {
+                closestFlamingo.setTarget(clickX, clickY);
+            }
+            // for (let movables of movable) {
+            //     if (movables instanceof Flamingo) {
+            //         let flamingo = movables as Flamingo;
+            //         flamingo.moveToCrumb(clickX, clickY); //Flamingo bewegt sich zu Crumb
+            //         console.log("crumb push");
+            //         break; // Nur den ersten Flamingo behandeln, der gefunden wurde
+            //     }
+            // }
         }
         for (let movables of movable) {
             if (movables instanceof L09_Pond.Duck) {

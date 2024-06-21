@@ -5,8 +5,8 @@ namespace L09_Pond {
 
         public constructor(_x: number, _y: number, _direction: Vector, _speedY:number, _speedX:number) {
             super(_x, _y, _direction);
-            this.speedX = Math.random() * 10 - 1; // Zufällige Geschwindigkeit in x-Richtung
-            this.speedY = Math.random() * 8 - 1; // Zufällige Geschwindigkeit in y-Richtung
+            this.speedX = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in x-Richtung
+            this.speedY = Math.random() * 5 - 1; // Zufällige Geschwindigkeit in y-Richtung
         }
 
         public move(): void {
