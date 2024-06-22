@@ -39,7 +39,7 @@ namespace L09_Pond {
     }
 
     public checkHit(_x: number, _y: number): boolean {
-        console.log("Hit")
+        //console.log("Hit")
         const minX = this.x - 20;
         const maxX = this.x + 20;
         const minY = this.y - 20;
@@ -54,7 +54,7 @@ namespace L09_Pond {
 
       public click(): void {
         // Zustand zu duckHeart wechseln und Frame-Zähler setzen
-        console.log("click")
+        //console.log("click")
         this.isClicked = true;
         this.state = "duckHeart";
     }
@@ -129,7 +129,7 @@ namespace L09_Pond {
     }
 
     private drawHeart(): void {
-        console.log("draw heart aufgerufen")
+        //console.log("draw heart aufgerufen")
         crc2.save()
         crc2.translate(this.x, this.y);
         if (this.direction.x === -1) {

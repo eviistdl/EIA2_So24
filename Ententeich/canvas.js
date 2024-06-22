@@ -65,7 +65,6 @@ var L09_Pond;
                     if (distance < closestDistance && flamingo.state !== "flamingoEat") {
                         closestDistance = distance;
                         closestFlamingo = flamingo;
-                        deleteCrumb();
                     }
                 }
             }
@@ -84,31 +83,34 @@ var L09_Pond;
     L09_Pond.handleClick = handleClick;
     function deleteCrumb() {
         crumbs = crumbs.filter((crumb) => {
-            // Überprüfen, ob der Crumb gelöscht werden soll, wenn der Flamingo "flamingoEat" ist
             for (let movables of movable) {
                 if (movables instanceof L09_Pond.Flamingo) {
                     let flamingo = movables;
-                    if (flamingo.state === "flamingoEat" && flamingo.targetPosition && crumb.x === flamingo.targetPosition.x && crumb.y === flamingo.targetPosition.y) {
-                        console.log("deleteCrumb");
-                        return false; // Crumb wird entfernt, wenn der Flamingo isst und die targetPosition übereinstimmt
+                    // Berechne die Entfernung zwischen Flamingo und Crumb
+                    let distance = Math.sqrt((flamingo.x - (crumb.x - 20)) ** 2 + (flamingo.y - (crumb.y + 40)) ** 2);
+                    // Überprüfe, ob die Entfernung kleiner als 30 ist
+                    if (distance < 100 && flamingo.state === "flamingoEat") {
+                        // console.log("deleteCrumb");
+                        return false; // Crumb wird entfernt, wenn die Entfernung kleiner als 30 ist
                     }
                 }
             }
-            return true; // Behalte den Crumb, wenn der Flamingo nicht isst oder die targetPosition nicht übereinstimmt
+            return true; // Behalte den Crumb, wenn die Entfernung größer oder gleich 30 ist
         });
     }
     L09_Pond.deleteCrumb = deleteCrumb;
     function animate() {
         drawBackround();
+        for (let crumb of crumbs) {
+            crumb.draw();
+        }
         for (let movables of movable) {
             movables.draw();
             movables.move();
             if (movable instanceof L09_Pond.Flamingo) {
             }
         }
-        for (let crumb of crumbs) {
-            crumb.draw();
-        }
+        deleteCrumb();
     }
     function drawBackround() {
         fillBackground();

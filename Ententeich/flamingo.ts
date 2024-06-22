@@ -3,11 +3,10 @@ namespace L09_Pond {
         public state: "flamingoNormal" | "flamingoEat";
         baseY: number;
         angle: number;
-        private targetX?: number;
-        private targetY?: number;
+        public targetX?: number;
+        public targetY?: number;
         private framesCounter: number = 0;
         previousPosition: Vector | null;
-        targetPosition: Vector | null;
        
 
         public constructor(_x: number, _y: number, _direction: Vector) {
@@ -16,7 +15,6 @@ namespace L09_Pond {
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI;
             this.previousPosition = null;
-            // this.targetPosition = null;
         }
 
         public move(): void {
@@ -24,7 +22,6 @@ namespace L09_Pond {
                 this.framesCounter++;
                 if (this.framesCounter >= 70) {
                     this.state = "flamingoNormal";
-                    this.targetPosition = null;
                     this.framesCounter = 0;
                 }
             } else if (this.targetX !== undefined && this.targetY !== undefined) {
@@ -39,7 +36,6 @@ namespace L09_Pond {
                     this.targetX = undefined;
                     this.targetY = undefined;
                     this.state = "flamingoEat";
-                    this.targetPosition = new Vector(this.x, this.y);
                     this.framesCounter = 0;
                 }
             } else {
@@ -50,8 +46,8 @@ namespace L09_Pond {
 
         public moveToCrumb(crumbX: number, crumbY: number): void {
             this.previousPosition = new Vector(this.x, this.y);
-            this.targetX = crumbX - 20;
-            this.targetY = crumbY + 40;
+            this.targetX = crumbX;
+            this.targetY = crumbY;
         }
 
         

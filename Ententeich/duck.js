@@ -35,7 +35,7 @@ var L09_Pond;
             }
         }
         checkHit(_x, _y) {
-            console.log("Hit");
+            //console.log("Hit")
             const minX = this.x - 20;
             const maxX = this.x + 20;
             const minY = this.y - 20;
@@ -50,7 +50,7 @@ var L09_Pond;
         }
         click() {
             // Zustand zu duckHeart wechseln und Frame-Zähler setzen
-            console.log("click");
+            //console.log("click")
             this.isClicked = true;
             this.state = "duckHeart";
         }
@@ -113,7 +113,7 @@ var L09_Pond;
             L09_Pond.crc2.restore();
         }
         drawHeart() {
-            console.log("draw heart aufgerufen");
+            //console.log("draw heart aufgerufen")
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
             if (this.direction.x === -1) {
