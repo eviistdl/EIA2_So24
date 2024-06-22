@@ -18,13 +18,13 @@ namespace L09_Pond {
         }
 
         public move(): void {
-            if (this.state === "flamingoEat") {
+            if (this.state === "flamingoEat") { //70 frames in state eat bleiben
                 this.framesCounter++;
                 if (this.framesCounter >= 70) {
                     this.state = "flamingoNormal";
                     this.framesCounter = 0;
                 }
-            } else if (this.targetX !== undefined && this.targetY !== undefined) {
+            } else if (this.targetX !== undefined && this.targetY !== undefined) { //Distanz zum Crumb berechnen
                 let dx = this.targetX - this.x;
                 let dy = this.targetY - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
@@ -38,26 +38,26 @@ namespace L09_Pond {
                     this.state = "flamingoEat";
                     this.framesCounter = 0;
                 }
-            } else {
+            } else { //Normale Flamingo Animation, springen
                 this.angle += 0.1;
                 this.y = this.baseY + Math.sin(this.angle) * 15;
             }
         }
 
         public moveToCrumb(crumbX: number, crumbY: number): void {
-            this.previousPosition = new Vector(this.x, this.y);
-            this.targetX = crumbX;
+            this.previousPosition = new Vector(this.x, this.y); //vorherige Position speichern
+            this.targetX = crumbX; //Ziel auf Koordinaten des crumbs setzen
             this.targetY = crumbY;
         }
 
         public setTarget(_x: number, _y: number): void {
-            this.targetX = _x - 37; // Geklickte position setzen
+            this.targetX = _x - 37; // Geklickte position leicht verschoben setzen
             this.targetY = _y - 50;
             this.state = "flamingoNormal"; 
           }
 
         public draw(): void {
-            switch (this.state) {
+            switch (this.state) { //states mit draw Methoden verknüpfen
                 case "flamingoEat":
                     this.flamingoEat();
                     break;
@@ -66,7 +66,7 @@ namespace L09_Pond {
             }
         }
 
-        public flamingoNormal(): void {
+        public flamingoNormal(): void { //Flamingo draw
             crc2.save();
             crc2.translate(this.x, this.y);
             // Körper
@@ -119,7 +119,7 @@ namespace L09_Pond {
             crc2.restore();
         }
 
-        public flamingoEat(): void {
+        public flamingoEat(): void { //Flamingo Eat zeichnen
             crc2.save();
             crc2.translate(this.x, this.y);
             // Körper

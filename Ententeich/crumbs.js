@@ -22,7 +22,6 @@ var L09_Pond;
             }
             else {
                 return false;
-                // Klick befindet sich nicht im Bereich
             }
         }
         getPosition() {

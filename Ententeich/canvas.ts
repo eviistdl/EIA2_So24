@@ -3,6 +3,7 @@ namespace L09_Pond {
 
     export let crc2: CanvasRenderingContext2D;
 
+    //Objekt Arrays
     let movable: Movable[] = [];
     let crumbs: Crumbs[] = [];
 
@@ -17,8 +18,8 @@ namespace L09_Pond {
 
         // Tails generieren
         for (let i: number = 0; i < 3; i++) {
-            let randomX: number = 270 + Math.random() * 250; // Zufällige x-Position
-            let randomY: number = 350 + Math.random() * 100; // Zufällige y-Position 
+            let randomX: number = 270 + Math.random() * 250;
+            let randomY: number = 350 + Math.random() * 100; 
             let tail: Tail = new Tail(randomX, randomY, new Vector(1, 0));
             //let tail: Tail = new Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new Vector(1, 0)); // Startposition
             movable.push(tail);
@@ -26,8 +27,8 @@ namespace L09_Pond {
 
         // Ducks generieren
         for (let i: number = 0; i < 3; i++) {
-            let randomX: number = 270 + Math.random() * 250; // Zufällige x-Position
-            let randomY: number = 350 + Math.random() * 100; // Zufällige y-Position 
+            let randomX: number = 270 + Math.random() * 250; 
+            let randomY: number = 350 + Math.random() * 100; 
             let duck: Duck = new Duck(randomX, randomY, new Vector(1, 0));
             movable.push(duck);
         }
@@ -58,7 +59,7 @@ namespace L09_Pond {
 
      
     export function handleClick(event: MouseEvent): void {
-        let canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect();
+        let canvasRect = (event.target as HTMLCanvasElement).getBoundingClientRect(); //Klickbaen Bereich festlegen
         let clickX = event.clientX - canvasRect.left;
         let clickY = event.clientY - canvasRect.top;
 
@@ -73,11 +74,10 @@ namespace L09_Pond {
             let closestDistance: number = Infinity; //kürzeste Distanz speichern
 
             for (let movables of movable) {
-                if (movables instanceof Flamingo) {
+                if (movables instanceof Flamingo) { //Distanz von Flamingos zu Crumb messen
                     let flamingo = movables as Flamingo;
                     let distance = Math.sqrt((flamingo.x - crumb.x) ** 2 + (flamingo.y - crumb.y) ** 2);
 
-            
                     // Zustand des Flamingos überprüfen
                     if (distance < closestDistance && flamingo.state !== "flamingoEat") {
                         closestDistance = distance;
@@ -92,7 +92,7 @@ namespace L09_Pond {
         }
 
         for (let movables of movable) {
-            if (movables instanceof Duck) {
+            if (movables instanceof Duck) { //Enten Position mit Klickposition abgleichen
                 let duck = movables as Duck
                 if (duck.checkHit(clickX, clickY)) {
                     
@@ -102,7 +102,7 @@ namespace L09_Pond {
     }
 
     export function deleteCrumb(): void {
-        crumbs = crumbs.filter((crumb) => {
+        crumbs = crumbs.filter((crumb) => { //Filter läuft durch Crumb Array und sortiert die aus, die die Bedingungen erfüllen
             for (let movables of movable) {
                 if (movables instanceof Flamingo) {
                     let flamingo = movables as Flamingo
@@ -110,14 +110,14 @@ namespace L09_Pond {
                     // Berechne die Entfernung zwischen Flamingo und Crumb
                     let distance = Math.sqrt((flamingo.x - (crumb.x - 20)) ** 2 + (flamingo.y - (crumb.y + 40)) ** 2);
     
-                    // Überprüfe, ob die Entfernung kleiner als 30 ist
+                    //Wenn Flamingo bei Crumb und es isst, lösche den Crumb
                     if (distance < 100 && flamingo.state === "flamingoEat") {
                         // console.log("deleteCrumb");
-                        return false; // Crumb wird entfernt, wenn die Entfernung kleiner als 30 ist
+                        return false;
                     }
                 }
             }
-            return true; // Behalte den Crumb, wenn die Entfernung größer oder gleich 30 ist
+            return true; 
         });
     }
     

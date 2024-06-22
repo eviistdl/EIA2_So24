@@ -2,6 +2,7 @@
 var L09_Pond;
 (function (L09_Pond) {
     window.addEventListener("load", handleLoad);
+    //Objekt Arrays
     let movable = [];
     let crumbs = [];
     function handleLoad(_event) {
@@ -13,16 +14,16 @@ var L09_Pond;
         canvas.addEventListener("click", handleClick);
         // Tails generieren
         for (let i = 0; i < 3; i++) {
-            let randomX = 270 + Math.random() * 250; // Zufällige x-Position
-            let randomY = 350 + Math.random() * 100; // Zufällige y-Position 
+            let randomX = 270 + Math.random() * 250;
+            let randomY = 350 + Math.random() * 100;
             let tail = new L09_Pond.Tail(randomX, randomY, new L09_Pond.Vector(1, 0));
             //let tail: Tail = new Tail(260 + Math.random() * 20, 330 + Math.random() * 80, new Vector(1, 0)); // Startposition
             movable.push(tail);
         }
         // Ducks generieren
         for (let i = 0; i < 3; i++) {
-            let randomX = 270 + Math.random() * 250; // Zufällige x-Position
-            let randomY = 350 + Math.random() * 100; // Zufällige y-Position 
+            let randomX = 270 + Math.random() * 250;
+            let randomY = 350 + Math.random() * 100;
             let duck = new L09_Pond.Duck(randomX, randomY, new L09_Pond.Vector(1, 0));
             movable.push(duck);
         }
@@ -48,7 +49,7 @@ var L09_Pond;
         setInterval(animate, 20);
     }
     function handleClick(event) {
-        let canvasRect = event.target.getBoundingClientRect();
+        let canvasRect = event.target.getBoundingClientRect(); //Klickbaen Bereich festlegen
         let clickX = event.clientX - canvasRect.left;
         let clickY = event.clientY - canvasRect.top;
         console.log(`Clicked at position: (${clickX}, ${clickY})`);
@@ -58,7 +59,7 @@ var L09_Pond;
             let closestFlamingo = null; //Flamingo speichern
             let closestDistance = Infinity; //kürzeste Distanz speichern
             for (let movables of movable) {
-                if (movables instanceof L09_Pond.Flamingo) {
+                if (movables instanceof L09_Pond.Flamingo) { //Distanz von Flamingos zu Crumb messen
                     let flamingo = movables;
                     let distance = Math.sqrt((flamingo.x - crumb.x) ** 2 + (flamingo.y - crumb.y) ** 2);
                     // Zustand des Flamingos überprüfen
@@ -73,7 +74,7 @@ var L09_Pond;
             }
         }
         for (let movables of movable) {
-            if (movables instanceof L09_Pond.Duck) {
+            if (movables instanceof L09_Pond.Duck) { //Enten Position mit Klickposition abgleichen
                 let duck = movables;
                 if (duck.checkHit(clickX, clickY)) {
                 }
@@ -88,14 +89,14 @@ var L09_Pond;
                     let flamingo = movables;
                     // Berechne die Entfernung zwischen Flamingo und Crumb
                     let distance = Math.sqrt((flamingo.x - (crumb.x - 20)) ** 2 + (flamingo.y - (crumb.y + 40)) ** 2);
-                    // Überprüfe, ob die Entfernung kleiner als 30 ist
+                    //Wenn Flamingo bei Crumb und es isst, lösche den Crumb
                     if (distance < 100 && flamingo.state === "flamingoEat") {
                         // console.log("deleteCrumb");
-                        return false; // Crumb wird entfernt, wenn die Entfernung kleiner als 30 ist
+                        return false;
                     }
                 }
             }
-            return true; // Behalte den Crumb, wenn die Entfernung größer oder gleich 30 ist
+            return true;
         });
     }
     L09_Pond.deleteCrumb = deleteCrumb;

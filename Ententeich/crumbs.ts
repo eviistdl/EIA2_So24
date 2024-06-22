@@ -22,12 +22,10 @@ namespace L09_Pond {
                 // Klick befindet sich im Bereich
             } else {
                     return false; 
-                
-                    // Klick befindet sich nicht im Bereich
             }
         }
 
-        public getPosition(): { x: number, y: number } {
+        public getPosition(): { x: number, y: number } { //Position des Crumbs auf Klick Position
             return { x: this.x, y: this.y };
         }
 

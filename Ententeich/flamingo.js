@@ -17,14 +17,14 @@ var L09_Pond;
             this.previousPosition = null;
         }
         move() {
-            if (this.state === "flamingoEat") {
+            if (this.state === "flamingoEat") { //70 frames in state eat bleiben
                 this.framesCounter++;
                 if (this.framesCounter >= 70) {
                     this.state = "flamingoNormal";
                     this.framesCounter = 0;
                 }
             }
-            else if (this.targetX !== undefined && this.targetY !== undefined) {
+            else if (this.targetX !== undefined && this.targetY !== undefined) { //Distanz zum Crumb berechnen
                 let dx = this.targetX - this.x;
                 let dy = this.targetY - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
@@ -39,23 +39,23 @@ var L09_Pond;
                     this.framesCounter = 0;
                 }
             }
-            else {
+            else { //Normale Flamingo Animation, springen
                 this.angle += 0.1;
                 this.y = this.baseY + Math.sin(this.angle) * 15;
             }
         }
         moveToCrumb(crumbX, crumbY) {
-            this.previousPosition = new L09_Pond.Vector(this.x, this.y);
-            this.targetX = crumbX;
+            this.previousPosition = new L09_Pond.Vector(this.x, this.y); //vorherige Position speichern
+            this.targetX = crumbX; //Ziel auf Koordinaten des crumbs setzen
             this.targetY = crumbY;
         }
         setTarget(_x, _y) {
-            this.targetX = _x - 37; // Geklickte position setzen
+            this.targetX = _x - 37; // Geklickte position leicht verschoben setzen
             this.targetY = _y - 50;
             this.state = "flamingoNormal";
         }
         draw() {
-            switch (this.state) {
+            switch (this.state) { //states mit draw Methoden verknüpfen
                 case "flamingoEat":
                     this.flamingoEat();
                     break;
