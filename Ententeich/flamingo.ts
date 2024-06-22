@@ -8,8 +8,7 @@ namespace L09_Pond {
         private framesCounter: number = 0;
         previousPosition: Vector | null;
         targetPosition: Vector | null;
-        // private positionBeforeX: number;
-        // private positionBeforeY: number;
+       
 
         public constructor(_x: number, _y: number, _direction: Vector) {
             super(_x, _y, _direction);
@@ -17,77 +16,48 @@ namespace L09_Pond {
             this.y = _y;
             this.angle = Math.random() * 2 * Math.PI;
             this.previousPosition = null;
-            this.targetPosition = null;
-            // this.positionBeforeX = _x;
-            // this.positionBeforeY = _y;
+            // this.targetPosition = null;
         }
 
         public move(): void {
-            // Speichern der aktuellen Position
-            // this.positionBeforeX = this.x;
-            // this.positionBeforeY = this.y;
-
-            if (this.targetX !== undefined && this.targetY !== undefined) {
+            if (this.state === "flamingoEat") {
+                this.framesCounter++;
+                if (this.framesCounter >= 70) {
+                    this.state = "flamingoNormal";
+                    this.targetPosition = null;
+                    this.framesCounter = 0;
+                }
+            } else if (this.targetX !== undefined && this.targetY !== undefined) {
                 let dx = this.targetX - this.x;
                 let dy = this.targetY - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance > 1) { // Schwelle, um zu entscheiden, ob Bewegung notwendig ist
+                if (distance > 1) {
                     this.x += dx / distance;
                     this.y += dy / distance;
                 } else {
-                    // Zielposition erreicht
                     this.targetX = undefined;
                     this.targetY = undefined;
-                    this.state = "flamingoEat"; // Status auf "Essen" setzen
+                    this.state = "flamingoEat";
+                    this.targetPosition = new Vector(this.x, this.y);
+                    this.framesCounter = 0;
                 }
             } else {
-                // Normale Bewegung
                 this.angle += 0.1;
-                // Höhe auf die base addieren, Amplitude = 15
                 this.y = this.baseY + Math.sin(this.angle) * 15;
-            }
-
-            if (this.state === "flamingoEat") {
-                this.framesCounter++;
-                if (this.framesCounter >= 70) {
-                    this.framesCounter = 0;
-                    this.state = "flamingoNormal";
-                }
             }
         }
 
         public moveToCrumb(crumbX: number, crumbY: number): void {
-            this.targetX = crumbX;
-            this.targetY = crumbY;
+            this.previousPosition = new Vector(this.x, this.y);
+            this.targetX = crumbX - 20;
+            this.targetY = crumbY + 40;
         }
 
-        update(): void {
-            if (this.state === "flamingoEat" && this.targetPosition) {
-                // Flamingo bewegen, solange er sich in "flamingoEat" Zustand befindet
-                this.x = this.targetPosition.x;
-                this.y = this.targetPosition.y;
-                this.framesCounter++; // Frames-Zähler erhöhen
-    
-                if (this.framesCounter >= 70) { // Wenn 70 Frames vergangen sind
-                    this.state = "flamingoNormal"; // Zustand zurück auf normal ändern
-                    this.framesCounter = 0; // Frames-Zähler zurücksetzen für den nächsten Einsatz
-    
-                    if (this.previousPosition) {
-                        // Zur vorherigen Position zurückkehren
-                        this.x = this.previousPosition.x;
-                        this.y = this.previousPosition.y;
-                    }
-                    this.previousPosition = null; // Vorherige Position leeren
-                    this.targetPosition = null; // Zielposition leeren
-                }
-            }
-        }
+        
 
 
         public setTarget(_x: number, _y: number): void {
-            // this.positionBeforeX = this.x; // Speichern der aktuellen Position
-            // this.positionBeforeY = this.y;
             this.targetX = _x - 20; // Geklickte position setzen
             this.targetY = _y - 50;
             this.state = "flamingoNormal"; 

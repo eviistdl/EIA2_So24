@@ -24,13 +24,6 @@ var L09_Pond;
                 return false; // Klick befindet sich nicht im Bereich
             }
         }
-        // public deleteCrumb(): void {
-        //     // Find the index of this crumb in the global crumbs array
-        //     let index = crumbs.indexOf(this);
-        //     if (index !== -1) {
-        //         crumbs.splice(index, 1); // Remove crumb from array
-        //     }
-        // }
         getPosition() {
             return { x: this.x, y: this.y };
         }
@@ -38,7 +31,7 @@ var L09_Pond;
             L09_Pond.crc2.save();
             L09_Pond.crc2.translate(this.x, this.y);
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.fillStyle = "red";
+            L09_Pond.crc2.fillStyle = "brown";
             L09_Pond.crc2.arc(0, 0, 10, 0, 2 * Math.PI);
             L09_Pond.crc2.fill();
             L09_Pond.crc2.closePath();

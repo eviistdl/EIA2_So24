@@ -75,12 +75,14 @@ namespace L09_Pond {
             for (let movables of movable) {
                 if (movables instanceof Flamingo) {
                     let flamingo = movables as Flamingo;
-                    let distance = Math.sqrt((flamingo.x - clickX) ** 4 + (flamingo.y - clickY) ** 4);
+                    let distance = Math.sqrt((flamingo.x - crumb.x) ** 2 + (flamingo.y - crumb.y) ** 2);
+
             
                     // Zustand des Flamingos überprüfen
                     if (distance < closestDistance && flamingo.state !== "flamingoEat") {
                         closestDistance = distance;
                         closestFlamingo = flamingo;
+                        deleteCrumb();
                     }
                 }
             }
@@ -88,14 +90,6 @@ namespace L09_Pond {
             if (closestFlamingo) {
                 closestFlamingo.setTarget(clickX, clickY);
             }
-            // for (let movables of movable) {
-            //     if (movables instanceof Flamingo) {
-            //         let flamingo = movables as Flamingo;
-            //         flamingo.moveToCrumb(clickX, clickY); //Flamingo bewegt sich zu Crumb
-            //         console.log("crumb push");
-            //         break; // Nur den ersten Flamingo behandeln, der gefunden wurde
-            //     }
-            // }
         }
 
         for (let movables of movable) {
@@ -108,7 +102,28 @@ namespace L09_Pond {
         }
     }
 
-
+    export function deleteCrumb(): void {
+    
+        crumbs = crumbs.filter((crumb) => {
+            // Überprüfen, ob der Crumb gelöscht werden soll, wenn der Flamingo "flamingoEat" ist
+            for (let movables of movable) {
+                if (movables instanceof Flamingo) {
+                    let flamingo = movables as Flamingo;
+                    if (flamingo.state === "flamingoEat" && flamingo.targetPosition && crumb.x === flamingo.targetPosition.x && crumb.y === flamingo.targetPosition.y) {
+                         console.log("deleteCrumb");
+                         return false; // Crumb wird entfernt, wenn der Flamingo isst und die targetPosition übereinstimmt
+                       
+                    }
+                }
+            }
+            return true; // Behalte den Crumb, wenn der Flamingo nicht isst oder die targetPosition nicht übereinstimmt
+        });
+    }
+    
+    
+    
+    
+    
     function animate(): void {
         drawBackround();
 
@@ -116,7 +131,6 @@ namespace L09_Pond {
             movables.draw();
             movables.move();
             if (movable instanceof Flamingo) {
-                movable.update(); // Aufruf der update-Methode für Flamingo
             }
         }
 
