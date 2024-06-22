@@ -2,6 +2,14 @@
 var L09_Pond;
 (function (L09_Pond) {
     window.addEventListener("load", handleLoad);
+    window.addEventListener("DOMContentLoaded", () => {
+        // Finde den Button im DOM
+        const moreBirdsBtn = document.getElementById("moreBirdsBtn");
+        // Füge einen Event Listener hinzu
+        if (moreBirdsBtn) {
+            moreBirdsBtn.addEventListener("click", handleMoreBirds);
+        }
+    });
     //Objekt Arrays
     let movable = [];
     let crumbs = [];
@@ -47,6 +55,24 @@ var L09_Pond;
             movable.push(ladybug);
         }
         setInterval(animate, 20);
+    }
+    function handleMoreBirds() {
+        const randomNumber = Math.random();
+        // Zufällig entscheiden, ob eine Ente oder ein Flamingo hinzugefügt wird
+        if (randomNumber < 0.5) {
+            // Ente hinzufügen
+            const randomX = 270 + Math.random() * 250;
+            const randomY = 350 + Math.random() * 100;
+            const duck = new L09_Pond.Duck(randomX, randomY, new L09_Pond.Vector(1, 0));
+            movable.push(duck);
+        }
+        else {
+            // Flamingo hinzufügen
+            const randomX = 10 + Math.random() * 250;
+            const randomY = 300 + Math.random() * 250;
+            const flamingo = new L09_Pond.Flamingo(randomX, randomY, new L09_Pond.Vector(1, 0));
+            movable.push(flamingo);
+        }
     }
     function handleClick(event) {
         let canvasRect = event.target.getBoundingClientRect(); //Klickbaen Bereich festlegen
