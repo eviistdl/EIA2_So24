@@ -50,7 +50,7 @@ var L09_Pond;
             this.targetY = crumbY;
         }
         setTarget(_x, _y) {
-            this.targetX = _x - 20; // Geklickte position setzen
+            this.targetX = _x - 37; // Geklickte position setzen
             this.targetY = _y - 50;
             this.state = "flamingoNormal";
         }
@@ -127,27 +127,27 @@ var L09_Pond;
             // Hals
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(20, 0);
-            L09_Pond.crc2.lineTo(18, 30);
+            L09_Pond.crc2.lineTo(24, 30);
             L09_Pond.crc2.strokeStyle = "#EE5A8D";
             L09_Pond.crc2.lineWidth = 4;
             L09_Pond.crc2.stroke();
             // Kopf 
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.arc(20, 40, 10, 0, 2 * Math.PI); // Kopf
+            L09_Pond.crc2.arc(28, 38, 10, 0, 2 * Math.PI); // Kopf
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "#EE5A8D";
             L09_Pond.crc2.fill();
             // Schnabel
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.moveTo(28, 45);
-            L09_Pond.crc2.lineTo(40, 36);
-            L09_Pond.crc2.lineTo(30, 35);
+            L09_Pond.crc2.moveTo(35, 45);
+            L09_Pond.crc2.lineTo(47, 36);
+            L09_Pond.crc2.lineTo(37, 35);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "#F99948";
             L09_Pond.crc2.fill();
             // Auge
             L09_Pond.crc2.beginPath();
-            L09_Pond.crc2.arc(24, 40, 2, 0, 2 * Math.PI);
+            L09_Pond.crc2.arc(30, 37, 2, 0, 2 * Math.PI);
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "black";
             L09_Pond.crc2.fill();

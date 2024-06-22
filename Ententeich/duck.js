@@ -133,6 +133,15 @@ var L09_Pond;
             L09_Pond.crc2.closePath();
             L09_Pond.crc2.fillStyle = "red";
             L09_Pond.crc2.fill();
+            //Augenbraue
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.beginPath();
+            L09_Pond.crc2.moveTo(20, -26);
+            L09_Pond.crc2.lineTo(25, -23);
+            L09_Pond.crc2.closePath();
+            L09_Pond.crc2.strokeStyle = "#000000";
+            L09_Pond.crc2.lineWidth = 1;
+            L09_Pond.crc2.stroke();
             // Schnabel
             L09_Pond.crc2.beginPath();
             L09_Pond.crc2.moveTo(30, -24);
@@ -142,6 +151,7 @@ var L09_Pond;
             L09_Pond.crc2.fillStyle = "orange";
             L09_Pond.crc2.fill();
             L09_Pond.crc2.strokeStyle = "brown";
+            L09_Pond.crc2.lineWidth = 1;
             L09_Pond.crc2.stroke();
             // Auge
             L09_Pond.crc2.beginPath();
@@ -158,6 +168,7 @@ var L09_Pond;
             L09_Pond.crc2.fillStyle = "yellow";
             L09_Pond.crc2.fill();
             L09_Pond.crc2.strokeStyle = "brown";
+            L09_Pond.crc2.lineWidth = 1;
             L09_Pond.crc2.stroke();
             // Herz zeichnen
             L09_Pond.crc2.save();

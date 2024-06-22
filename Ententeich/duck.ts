@@ -152,6 +152,16 @@ namespace L09_Pond {
         crc2.closePath();
         crc2.fillStyle = "red";
         crc2.fill();
+        //Augenbraue
+        crc2.beginPath();
+        crc2.beginPath();
+        crc2.moveTo(20, -26);
+        crc2.lineTo(25, -23);
+        crc2.closePath();
+        crc2.strokeStyle = "#000000";
+        crc2.lineWidth = 1; 
+        crc2.stroke();
+
 
         // Schnabel
         crc2.beginPath();
@@ -162,6 +172,7 @@ namespace L09_Pond {
         crc2.fillStyle = "orange";
         crc2.fill();
         crc2.strokeStyle = "brown";
+        crc2.lineWidth = 1;
         crc2.stroke();
 
         // Auge
@@ -180,6 +191,7 @@ namespace L09_Pond {
         crc2.fillStyle = "yellow";
         crc2.fill();
         crc2.strokeStyle = "brown";
+        crc2.lineWidth = 1;
         crc2.stroke();
 
         // Herz zeichnen

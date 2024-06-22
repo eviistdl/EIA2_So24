@@ -21,7 +21,8 @@ var L09_Pond;
                 // Klick befindet sich im Bereich
             }
             else {
-                return false; // Klick befindet sich nicht im Bereich
+                return false;
+                // Klick befindet sich nicht im Bereich
             }
         }
         getPosition() {

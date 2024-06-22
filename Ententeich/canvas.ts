@@ -127,7 +127,7 @@ namespace L09_Pond {
         for (let crumb of crumbs) {
             crumb.draw();
         }
-        
+
         for (let movables of movable) {
             movables.draw();
             movables.move();

@@ -50,11 +50,8 @@ namespace L09_Pond {
             this.targetY = crumbY;
         }
 
-        
-
-
         public setTarget(_x: number, _y: number): void {
-            this.targetX = _x - 20; // Geklickte position setzen
+            this.targetX = _x - 37; // Geklickte position setzen
             this.targetY = _y - 50;
             this.state = "flamingoNormal"; 
           }
@@ -134,27 +131,27 @@ namespace L09_Pond {
             // Hals
             crc2.beginPath();
             crc2.moveTo(20, 0);
-            crc2.lineTo(18, 30); 
+            crc2.lineTo(24, 30); 
             crc2.strokeStyle = "#EE5A8D";
             crc2.lineWidth = 4;
             crc2.stroke();
             // Kopf 
             crc2.beginPath();
-            crc2.arc(20, 40, 10, 0, 2 * Math.PI); // Kopf
+            crc2.arc(28, 38, 10, 0, 2 * Math.PI); // Kopf
             crc2.closePath();
             crc2.fillStyle = "#EE5A8D";
             crc2.fill();
             // Schnabel
             crc2.beginPath();
-            crc2.moveTo(28, 45);
-            crc2.lineTo(40, 36);
-            crc2.lineTo(30, 35);
+            crc2.moveTo(35, 45);
+            crc2.lineTo(47, 36);
+            crc2.lineTo(37, 35);
             crc2.closePath();
             crc2.fillStyle = "#F99948";
             crc2.fill();
             // Auge
             crc2.beginPath();
-            crc2.arc(24, 40, 2, 0, 2 * Math.PI); 
+            crc2.arc(30, 37, 2, 0, 2 * Math.PI); 
             crc2.closePath();
             crc2.fillStyle = "black";
             crc2.fill();

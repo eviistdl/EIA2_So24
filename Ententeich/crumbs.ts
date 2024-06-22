@@ -21,7 +21,9 @@ namespace L09_Pond {
                 return (_clickX >= 10 && _clickX <= 270 && _clickY >= 300 && _clickY <= 500);
                 // Klick befindet sich im Bereich
             } else {
-                return false; // Klick befindet sich nicht im Bereich
+                    return false; 
+                
+                    // Klick befindet sich nicht im Bereich
             }
         }
 
