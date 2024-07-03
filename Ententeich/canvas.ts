@@ -231,7 +231,7 @@ namespace L09_Pond {
         // Grünen Hintergrund zeichnen
         let grassColor: string = "#90E162";
         crc2.fillStyle = grassColor;
-        crc2.fillRect(0, 0, 600, 600);
+        crc2.fillRect(0, 0, 1000, 600);
 
         // Blaues Rechteck zeichnen
         let skyColor: string = "#48BCE1";
