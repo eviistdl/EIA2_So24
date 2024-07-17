@@ -191,7 +191,7 @@ var L09_Pond;
         // Grünen Hintergrund zeichnen
         let grassColor = "#90E162";
         L09_Pond.crc2.fillStyle = grassColor;
-        L09_Pond.crc2.fillRect(0, 0, 600, 600);
+        L09_Pond.crc2.fillRect(0, 0, 1000, 600);
         // Blaues Rechteck zeichnen
         let skyColor = "#48BCE1";
         L09_Pond.crc2.fillStyle = skyColor;
